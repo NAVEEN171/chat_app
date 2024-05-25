@@ -4,12 +4,14 @@ import Chatcontainer from "../components/chatcontainer";
 import { useEffect,useState } from "react";
 import { set } from "mongoose";
 import io from "socket.io-client";
+import { useNavigate } from "react-router-dom";
 
 
 import Contacts from "../components/Contacts";
 var socket;
 
 const Chatbox=()=>{
+    
     const [currentholder,setcurrentholder]=useState({});
     const [connsocket,setconnsocket]=useState(false);
     const [datacontent,setdatacontent]=useState([])
@@ -30,7 +32,7 @@ const Chatbox=()=>{
     const [changeactive,setchangeactive]=useState(false);
     const [bgimg,setbgimg]=useState("");
 
-
+      const navigate=useNavigate()
 
         //search name of the chat and join room id using socket
     const searchname=async()=>{
@@ -305,7 +307,12 @@ if(joinedroom===currentchat._id+currentholder._id || joinedroom===currentholder.
             console.log(allusers.users);
             setcontacts(allusers.users)
             
-        }}
+        }
+
+        else{
+          navigate("/Login")
+        }
+    }
         run();
     },[])
     
