@@ -1,0 +1,123 @@
+.aven{
+    border-radius:50%;
+    height:130px;
+
+   align-self:center;
+   justify-self:center;
+
+    width:130px;
+
+    background-size: cover;
+    background-position: center; /* Center the background image within the div */
+    background-repeat: no-repeat;
+    transition:transform 0.2s ease-in-out;
+
+}
+.bottom-wrapper{
+    display:flex;
+    justify-content:space-evenly;
+    width:100%;
+}
+.setprofile{
+    height:40px;
+    outline: none;
+    border:none;
+    background-color:rgb(136, 112, 255);
+    cursor:pointer;
+    color:white;
+    font-size:20px;
+
+
+    font-weight:400;
+    border-radius:10px;
+}
+.choosefile{
+    display:flex;
+    align-items: center;
+}
+.setprofile:hover{
+    color:black;
+}
+
+.avenn{
+    border-radius:50%;
+    height:130px;
+
+   align-self:center;
+   justify-self:center;
+
+    width:130px;
+
+    background-size: cover;
+    background-position: center; /* Center the background image within the div */
+    background-repeat: no-repeat;
+    transition:transform 0.2s ease-in-out; 
+}
+.selected{
+    border:3px solid lime;
+}
+.avatarwrapper{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width:100%;
+    height:450px;
+}
+.avatarselection{
+    font-size:30px;
+    font-weight: 700;
+    font-family: sans-serif;
+    text-align: center;
+    padding:6px;
+}
+.avatars{
+    display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 4 columns */
+  grid-template-rows: repeat(2, 1fr); /* 2 rows */
+  align-items:center;
+   justify-content:space-evenly;
+ 
+  
+   width:90%;
+   height:400px;
+  
+  
+  
+   
+   
+   
+
+    
+}
+.aven:hover{
+    transform:scale(1.3);
+    z-index:1;
+}
+.imagepreview{
+    color:black;
+    font-size: 22px;
+    margin-bottom:5px;
+    font-weight: 600;
+}
+
+.avenn{
+    border-radius:50%;
+    height:140px;
+
+    width:140px;
+    background-image: url("") ;
+    background-size: cover;
+    background-size: cover;
+    background-position: center; /* Center the background image within the div */
+    background-repeat: no-repeat;
+
+}
+.imagewrapper{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.chatbox{
+    display:flex;
+}

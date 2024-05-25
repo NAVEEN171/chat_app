@@ -1,0 +1,30 @@
+.mainwrapper{
+   height:50px;
+    width:210px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    background-color:rgb(219, 220, 255);
+    border-radius: 10px;
+
+
+}
+.center-2{
+    height:60px;
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content: center;
+}
+.image{
+    height:40px;
+
+    
+}
+.chat{
+   font-size: 20px;
+   font-weight: 700;
+   color:black;
+   margin-left:5px;
+   
+}
