@@ -305,6 +305,8 @@ if(joinedroom===currentchat._id+currentholder._id || joinedroom===currentholder.
             console.log(using.user._id)
             socket=io(`${process.env.REACT_APP_DEPLOYMENT_BACKEND}`,{
                 reconnection:false,
+                transports: ['websocket'] // Use WebSocket transport for better performance
+
             })
             //user connecting to socket
             socket.on('connect', () => {
