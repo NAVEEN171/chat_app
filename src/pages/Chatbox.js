@@ -18,7 +18,7 @@ const Chatbox=()=>{
     const [showmyprofile,setshowmyprofile]=useState(false);
     const [onmsg,setonmsg]=useState(false);
     const [currentmsgid,setcurrentmsgid]=useState("");
-    const [change,setchange]=useState(false)
+    const [change,setchange]=useState(false);
 
     const [currentchat,setcurrentchat]=useState(null);
     const [msgss,setmsgss]=useState([]);
@@ -31,8 +31,24 @@ const Chatbox=()=>{
     const [loaded,setloaded]=useState(false);
     const [changeactive,setchangeactive]=useState(false);
     const [bgimg,setbgimg]=useState("");
+    const [date,setdate]=useState(new Date());
+    const [futuretime,setfuturetime]=useState(null);
+    console.log(date);
 
       const navigate=useNavigate()
+
+
+
+      useEffect(()=>{
+
+    let future_time=new Date(date.getTime()+ 2* 60000);
+
+        console.log(future_time);
+        console.log(future_time>date)
+        setfuturetime(future_time)
+      }
+    ,[]);
+   
 
         //search name of the chat and join room id using socket
     const searchname=async()=>{
