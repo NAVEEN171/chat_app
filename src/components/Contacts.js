@@ -139,7 +139,11 @@ scrolldownhandler();
     }
     },[presentstatus])
   
-   
+   const clearmessages=(index)=>{
+         if(presentcontacts.length>0 && presentcontacts[index].unseenmessages>0){
+          presentcontacts[index]=0;
+         }
+   }
     const selecthandler=(uid)=>{
         
     if(prevtouched){
@@ -191,7 +195,7 @@ scrolldownhandler();
                     }
 
                     return(
-                    <div className="center" onClick={()=>{selecthandler(user._id);changechat(user)}} key={user._id} id={user._id}>
+                    <div className="center" onClick={()=>{selecthandler(user._id);changechat(user);clearmessages(index)}} key={user._id} id={user._id}>
                     <div className="currentholdwrapper">
                       <div className="img-wrapper">
                         <img className="imagee" src={user.avatarimage.startsWith("uploads")?`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/${user.avatarimage}`:user.avatarimage}/>
