@@ -39,6 +39,9 @@ overflow:auto;
     display: inline-block;
     
 }
+.txt{
+    max-width:400px;
+}
 
 .mss{
     display: inline-block;

@@ -14,6 +14,7 @@ const Chatbox=()=>{
     
     const [currentholder,setcurrentholder]=useState({});
     const [connsocket,setconnsocket]=useState(false);
+    const [connected,setconnected]=useState(0);
     const [datacontent,setdatacontent]=useState([])
     const [showmyprofile,setshowmyprofile]=useState(false);
     const [onmsg,setonmsg]=useState(false);
@@ -98,6 +99,7 @@ Fetchdata();
 
    useEffect(()=>{
     const run=async()=>{
+        if(joinedroom!==""){
 
     if(localStorage.getItem("chat with favos")){
         console.log("heyyy")
@@ -118,6 +120,7 @@ Fetchdata();
             data=await data.json()
         }
     }
+}
         
     }
 
@@ -299,83 +302,105 @@ if(joinedroom===currentchat._id+currentholder._id || joinedroom===currentholder.
             running()
 
                }
-       },[sendd])
+       },[sendd]);
 
+
+       const makeuseronline=async(uid)=>{
+        console.log(uid);
+        let data=await fetch(`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/status/${uid}`,{
+            method:"POST",
+            headers:{
+                'Content-Type':'application/json'
+              },
+              body:JSON.stringify(
+                {type:"online"}
+              )
+
+        })
+        if(data){
+            data=await data.json();
+            console.log(data);
+            console.log("i am loki")
+
+            setchangeactive(!changeactive);
+
+        }
+       }
+
+
+       const messagerecieved=async(message)=>{
+        if(message.status===true && message.lastelement.uid!==currentmsgid ){
+                
+            console.log(`message recieved is ${message}`)
+            console.log(message)
+            console.log("running//");
+            console.log(message.lastelement.uid)
+            console.log(currentmsgid)
+        setcurrentmsgid(message.lastelement.uid)
+            
+            
+           setmsgss([...msgss,message.lastelement]);
+           
+           setchange(!change);
+           
+           
+
+            
+        }
+       }
+  const makeuseroffline=async(useridentification)=>{
+
+    console.log(useridentification);
+    let data=await fetch(`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/status/${useridentification}`,{
+                    method:"POST",
+                    headers:{
+                        'Content-Type':'application/json'
+                      },
+                      body:JSON.stringify(
+                        {type:"offline"}
+                      )
+    
+                })
+                if(data){
+                    data=await data.json();
+                    console.log(data);
+                    console.log("i am loki")
+
+        setchangeactive(!changeactive);
+                    
+                }
+                let data2=await fetch(`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/changeroom/${"Empty"}`,{
+                    method:"POST",
+                    headers:{
+                        'Content-Type':'application/json'
+                    },  
+                    body:JSON.stringify({
+                        user:currentholder._id,
+                    })
+        
+                   });
+                   if(data2){
+                       data2=await data2.json()
+                   }
+    
+                
+  }
 
    useEffect(()=>{
-    if(connsocket ){
+    if(connsocket){
      
-           
-        socket.on("connuser",async(uid)=>{
-            console.log(uid);
-            let data=await fetch(`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/status/${uid}`,{
-                method:"POST",
-                headers:{
-                    'Content-Type':'application/json'
-                  },
-                  body:JSON.stringify(
-                    {type:"online"}
-                  )
-
-            })
-            if(data){
-                data=await data.json();
-                console.log(data);
-                console.log("i am loki")
-
-                setchangeactive(!changeactive);
-
-            }
-        })
-        socket.on("disconn",async(useridentification)=>{
-            console.log(useridentification);
-            let data=await fetch(`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/status/${useridentification}`,{
-                            method:"POST",
-                            headers:{
-                                'Content-Type':'application/json'
-                              },
-                              body:JSON.stringify(
-                                {type:"offline"}
-                              )
-            
-                        })
-                        if(data){
-                            data=await data.json();
-                            console.log(data);
-                            console.log("i am loki")
-
-                setchangeactive(!changeactive);
-                            
-                        }
-            
-                        })
+    
+        socket.on("connuser",makeuseronline);
+    
+        socket.on("disconn",makeuseroffline);
                     
        
-        socket.on("message recieved",(message)=>{
-            
-           
-            
-            if(message.status===true && message.lastelement.uid!==currentmsgid ){
-                
-                console.log(`message recieved is ${message}`)
-                console.log(message)
-                console.log("running//");
-                console.log(message.lastelement.uid)
-                console.log(currentmsgid)
-            setcurrentmsgid(message.lastelement.uid)
-                
-                
-               setmsgss([...msgss,message.lastelement]);
-               
-               setchange(!change);
-               
-               
-
-                
-            }
-        })
+        socket.on("message recieved",messagerecieved)
         return () => {
-            socket.off('message received');
+            socket.off("connuser",makeuseronline);
+            socket.off("disconn",makeuseroffline);
+            socket.off("message recieved",messagerecieved)
+
           };
  } })
  
@@ -404,7 +429,8 @@ if(joinedroom===currentchat._id+currentholder._id || joinedroom===currentholder.
             //user connecting to socket
             socket.on('connect', () => {
                 console.log('Connected to server');
-                setconnsocket(true)
+                setconnsocket(true);
+                setconnected(1);
               });
               socket.emit("setup",using.user);
             
