@@ -28,7 +28,39 @@ setfocused(true)
     }
     const messagechangehandle=(e)=>{
             setmsg(e.target.value);
-            console.log(msg)
+            console.log(msg);
+            let target=e.target;
+            let inputelement=document.getElementById("inputwrapper");
+            let inputwrapper=document.getElementById("messagewrapper");
+            let messagecontainer=document.getElementById("messages");
+            console.log(messagecontainer);
+            e.target.style.height=`40px`;
+              inputelement.style.height=`60px`;
+              inputwrapper.style.height=`70px`;
+              messagecontainer.style.height=`${window.innerHeight-140}px`
+            if(target.scrollHeight<250){
+              
+                  e.target.style.height=`${target.scrollHeight-20}px`;
+             inputelement.style.height=`${target.scrollHeight}px`;
+            inputwrapper.style.height=`${target.scrollHeight+10}px`;
+          
+            messagecontainer.style.height=`${window.innerHeight-(parseInt(inputwrapper.style.height))-70}px`
+            console.log(window.innerHeight-70-parseInt(inputwrapper.style.height));
+            }
+            else{
+              e.target.style.height=`250px`;
+              inputelement.style.height=`270px`;
+             inputwrapper.style.height=`280px`;
+           
+             messagecontainer.style.height=`${window.innerHeight-(parseInt(inputwrapper.style.height))-70}px`
+              console.log("less")
+            }
+            console.log(target.scrollHeight)
+          
+      
+
+
+            
     }
     const sendhandler=async()=>{
       console.log("running..................")
@@ -114,13 +146,13 @@ setshow(!show)
             </div>
             </div>
             <Messageswrapper bgimg={bgimg} currentchatmsgs={currentchatmsgs}/>
-              <div className="messagewrapper">
+              <div className="messagewrapper" id="messagewrapper">
             {show && <div className="emojiwrapper"><EmojiPicker emojiStyle="google" onEmojiClick={handleemojiclick} className="emoji-picker-react"/></div>}
 
-               <div className={focused?"inputwrapper focus":"inputwrapper"} >
+               <div className={focused?"inputwrapper focus":"inputwrapper"} id="inputwrapper">
               <svg className="emoji"  onClick={closeshowhandler} xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M612.489-535.385q18.665 0 31.55-13.065 12.884-13.066 12.884-31.731t-13.065-31.55q-13.066-12.884-31.731-12.884t-31.55 13.065q-12.885 13.066-12.885 31.731t13.066 31.55q13.066 12.884 31.731 12.884Zm-264.616 0q18.665 0 31.55-13.065 12.885-13.066 12.885-31.731t-13.066-31.55q-13.066-12.884-31.731-12.884t-31.55 13.065q-12.884 13.066-12.884 31.731t13.065 31.55q13.066 12.884 31.731 12.884ZM480-284.615q57.231 0 105.423-31.577 48.193-31.577 72.423-83.808H302.154q24.23 52.231 72.423 83.808Q422.769-284.615 480-284.615ZM480.134-120q-74.673 0-140.41-28.339-65.737-28.34-114.365-76.922-48.627-48.582-76.993-114.257Q120-405.194 120-479.866q0-74.673 28.339-140.41 28.34-65.737 76.922-114.365 48.582-48.627 114.257-76.993Q405.194-840 479.866-840q74.673 0 140.41 28.339 65.737 28.34 114.365 76.922 48.627 48.582 76.993 114.257Q840-554.806 840-480.134q0 74.673-28.339 140.41-28.34 65.737-76.922 114.365-48.582 48.627-114.257 76.993Q554.806-120 480.134-120ZM480-480Zm0 320q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Z"/></svg>
 
-               <input type="text"onFocus={focushandler} onBlur={blurhandler} id="typinginput" value={msg} onClick={()=>{setshow(false)}} onChange={(e)=>{messagechangehandle(e)}}  className="message" placeholder="your message"></input>
+               <textarea type="text"onFocus={focushandler} onBlur={blurhandler} id="typinginput" value={msg} onClick={()=>{setshow(false)}} onChange={(e)=>{messagechangehandle(e)}}  className="message" placeholder="your message"></textarea>
                <svg className="sendbutton" onClick={()=>{sendhandler();}} xmlns="http://www.w3.org/2000/svg" height="28" viewBox="0 -960 960 960" width="28"><path d="M140.001-190.002v-579.996L828.458-480 140.001-190.002ZM200-280l474-200-474-200v147.693L416.921-480 200-427.693V-280Zm0 0v-400 400Z"/></svg>
 
                </div>

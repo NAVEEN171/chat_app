@@ -8,7 +8,7 @@ const Messageswrapper=({bgimg,currentchatmsgs})=>{
     console.log(bgimg)
         return(
             <Fragment>
-            <div  className="messages" style={{backgroundImage:`url(${bgimg})`}}>
+            <div  className="messages" id="messages" style={{backgroundImage:`url(${bgimg})`}}>
             <div  id="messagecontainer"  className="messageswrapper">
                 {(currentchatmsgs.length>0) && currentchatmsgs.map((current,index)=>{
                       const dateObject = new Date(current.timestamps);

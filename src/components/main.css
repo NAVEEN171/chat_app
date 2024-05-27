@@ -1,6 +1,6 @@
 .mainwrapper{
-   height:50px;
-    width:210px;
+   height:60px;
+    width:90%;
     display:flex;
     align-items: center;
     justify-content: center;
@@ -10,7 +10,7 @@
 
 }
 .center-2{
-    height:60px;
+    height:70px;
     width:100%;
     display:flex;
     align-items:center;
@@ -25,6 +25,6 @@
    font-size: 20px;
    font-weight: 700;
    color:black;
-   margin-left:5px;
+   margin-left:15px;
    
 }

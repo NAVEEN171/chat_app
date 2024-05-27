@@ -36,18 +36,109 @@ const Chatbox=()=>{
     console.log(date);
 
       const navigate=useNavigate()
+      
+useEffect(()=>{
+    const Fetchdata=async()=>{
+    if(currentchat!==null){
+    let data=await fetch(`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/messages/search`,
+        {
+        method:"POST",
+
+        headers:{
+            'Content-Type':'application/json'
+        },  
+        body:JSON.stringify({
+            userid:currentholder._id,
+            selectedid:currentchat._id
+        })
+    }
+    )
+    if(data){
+        data=await data.json();
+        console.log(data);
+        if(data.msg==="success"){
+           let data2=await fetch(`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/changeroom/${data.id}`,{
+            method:"POST",
+            headers:{
+                'Content-Type':'application/json'
+            },  
+            body:JSON.stringify({
+                user:currentholder._id,
+            })
+
+           });
+           if(data2){
+            data2=await data2.json()
+           }
+        }
+        else{
+            console.log(data);
+               let data2=await fetch(`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/changeroom/${"Empty"}`,{
+                 method:"POST",
+                 headers:{
+                     'Content-Type':'application/json'
+                 },  
+                 body:JSON.stringify({
+                     user:currentholder._id,
+                 })
+     
+                });
+                if(data2){
+                    data2=await data2.json()
+                }
+
+        }
+
+    }
+}}
+Fetchdata();
+},[currentchat])
 
 
 
-      useEffect(()=>{
+   useEffect(()=>{
+    const run=async()=>{
 
-    let future_time=new Date(date.getTime()+ 2* 60000);
+    if(localStorage.getItem("chat with favos")){
+        console.log("heyyy")
+        let local=JSON.parse(localStorage.getItem("chat with favos"));
+       
+        
+    
+        let data=await fetch(`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/messages/clearmessages/${joinedroom}`,{
+            method:"POST",
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({
+                to:local._id
+            })
+        })
+        if(data){
+            data=await data.json()
+        }
+    }
+        
+    }
+
+
+run();
+
+
+
+   },[joinedroom]
+
+)
+
+    /*  useEffect(()=>{
+
+   let future_time=new Date(date.getTime()+ 2* 60000);
 
         console.log(future_time);
         console.log(future_time>date)
         setfuturetime(future_time)
       }
-    ,[]);
+    ,[]);*/
    
 
         //search name of the chat and join room id using socket
@@ -72,7 +163,8 @@ if(joinedroom===currentchat._id+currentholder._id || joinedroom===currentholder.
                 console.log("data is")
                 socket.emit("join chat",data.id);
                socket.on("joinedchat",(room)=>{
-                console.log(`room joined is ${room}`)
+                console.log(`room joined is ${room}`);
+             
                 if(room){
                     setjoinedroom(room);
                 }
@@ -129,6 +221,7 @@ if(joinedroom===currentchat._id+currentholder._id || joinedroom===currentholder.
 
     //if current chat changes or message sent, this will run --> fetches the msgs from DB and if message sent it 
     //will run the socket funcction "new message"
+        
     useEffect(()=>{
         const runmsg=async()=>{
         if(currentchat!==null ){
@@ -191,8 +284,8 @@ if(joinedroom===currentchat._id+currentholder._id || joinedroom===currentholder.
             }
         }}
         runmsg()
-        
     },[currentchat,msgsent])
+        
     useEffect(()=>{
         if(sendd!==null && msgss.length!==0){   
            const running=async()=>{ 

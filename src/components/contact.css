@@ -1,5 +1,5 @@
 .contacts-wrapper{
-    width:250px;
+    width:25%;
     height:100vh;
     border:none;
     
@@ -14,8 +14,8 @@
 }
 .img-wrapper{
     position: relative;
-    height:50px;
-    width:50px;
+    height:60px;
+    width:60px;
     margin-left:10px;
     border-radius:10px;
 }
@@ -40,7 +40,7 @@
 
 .allusers{
     overflow:auto;
-    height:calc(100% - 170px)
+    height:calc(100% - 180px)
 }
 .center{
     display:flex;
@@ -49,9 +49,24 @@
     
 
 }
+.last{
+    width:20px;
+    border-radius: 50%;
+    background-color: #ff7955;
+    color:white;
+    text-align: center;
+    line-height: 20px;
+}
+.first{
+    width:calc(100% - 20px);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+}
 .currentholdwrapper{
-    width:220px;
-    height:70px;
+    width:90%;
+    height:80px;
     display:flex;
     align-items: center;
     
@@ -100,6 +115,7 @@
     font-weight: 700;
     font-style: sans-serif;
     white-space: nowrap;
+    width:100%;
 
     text-overflow: ellipsis;
     overflow: hidden;
@@ -115,6 +131,7 @@
 }
 .lastmsg{
     width:100%;
+    display:flex;
     color:rgb(155, 153, 153);
     font-size: 16px;
     font-weight: 500;

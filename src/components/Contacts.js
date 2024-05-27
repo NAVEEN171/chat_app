@@ -39,11 +39,13 @@ scrolldownhandler();
               local = JSON.parse(localStorage.getItem("chat with favos"));
             }
             cons = [...contacts];
+            console.log("i think msg recieved")
             console.log(cons);
       
             if (local && contacts.length > 0) {
               promises = cons.map(async (user) => {
                 try {
+                  console.log("fecthing users data")
                   const data = await fetch(`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/messages/search`, {
                     method: "POST",
                     headers: {
@@ -61,6 +63,7 @@ scrolldownhandler();
       
                     if (result.msg === "success") {
                       user.lastmessage = result.lastmessage;
+                      user.unseenmessages=result.unseenmessages;
                     } else {
                       user.lastmessage = null;
                     }
@@ -85,6 +88,12 @@ scrolldownhandler();
           getMessages();
         }
       }, [contacts, msgsent,change]);
+      useEffect(()=>{
+      console.log("present contacts are")
+        console.log(presentcontacts);
+      }
+      ,[presentcontacts]
+    )
       useEffect(()=>{
         let users=[]
         let promises=[]
@@ -194,7 +203,10 @@ scrolldownhandler();
                         <div className="timestamps">{formattedTime?formattedTime:""}</div>
                         
                         </div>
-                        <div className="lastmsg">{presentcontacts.length>0?presentcontacts[index]?.lastmessage?.txt ||"say hello👋" :"say hello👋"}</div>
+                        <div className="lastmsg">
+                          <div className="first">{presentcontacts.length>0?presentcontacts[index]?.lastmessage?.txt ||"say hello👋" :"say hello👋"}</div>
+                          {presentcontacts.length>0 && (presentcontacts[index]?.unseenmessages)>0?<div className="last">{presentcontacts[index]?.unseenmessages}</div>:null}
+                          </div>
                         </div>
                         </div>
                         </div>
