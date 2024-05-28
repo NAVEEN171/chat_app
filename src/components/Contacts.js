@@ -17,7 +17,7 @@ const scrolldownhandler=()=>{
   if(element){
     console.log(element.scrollHeight)
     
-    element.scrollTop=element.scrollHeight+41.6;
+    element.scrollTop=element.scrollHeight;
   }
 }
 useEffect(()=>{
@@ -82,7 +82,7 @@ scrolldownhandler();
       
           await Promise.all(promises);
           setpresentcontacts([...cons]);
-          scrolldownhandler()
+          setTimeout(()=>{scrolldownhandler()},200);
           
         };
       
