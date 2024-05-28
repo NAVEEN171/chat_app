@@ -58,6 +58,7 @@ transition: all 0.2s;
     border:none;
     border-bottom:2px solid black;
     text-indent:10px;
+    font-size: 15px;
 
 }
 .exit{
@@ -94,4 +95,54 @@ transition: all 0.2s;
     border:1px solid rgb(79, 128, 255);
     color:rgb(79, 128, 255);
     cursor: pointer;
+}
+
+@media(max-width:1000px){
+    .mainprofile{
+        height:500px;
+        width:500px;
+    }
+}
+
+@media(max-width:800px){
+    .mainprofile{
+        height:450px;
+        width:400px;
+    }
+}
+
+@media(max-width:700px){
+    .mainprofile{
+        width:350px;
+    }
+}
+
+
+
+@media(max-width:600px){
+    .mainprofilewrapper{
+        width:100%;
+    }
+}
+@media(max-width:400px){
+    .mainprofile{
+        width:85%;
+    }
+    .changephotobutt{
+        font-size: 17px;
+    }
+    .detailwrappers button{
+             font-size:15px;
+    }
+}
+
+
+@media(max-width:330px){
+    .nameinput{
+        width:60%;
+    }
+    .iconswrapper{
+        width:30%;
+
+    }
 }

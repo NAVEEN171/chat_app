@@ -68,7 +68,7 @@
     justify-content: center;
     height:60px;
 }
-#typinginput:-webkit-scrollbar,.inputwrapper::-webkit-scrollbar{
+textarea:-webkit-scrollbar,.inputwrapper::-webkit-scrollbar{
 width:0px;
 }
 
@@ -136,4 +136,40 @@ textarea{
     display:flex;
     align-items: center;
     
+}
+
+.backarrow{
+    height:25px;
+    width:35px;
+cursor:pointer;
+margin-left:5px;    
+}
+
+
+@media(max-width:400px){
+    .username1{
+        font-size: 20px;
+        font-weight: 500;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        width:calc(100% - 100px);
+    }
+    .profilepic{
+        height:50px;
+        width:50px;
+
+    }
+    .emojiwrapper{
+        width:250px;
+    }
+    aside{
+        width:290px !important;
+    }
+    .detailswrapper{
+        width:260px;
+    }
+   textarea{
+    text-indent:20px;
+   }
 }

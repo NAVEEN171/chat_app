@@ -6,6 +6,7 @@ import Messageswrapper from "./messageswrapper"
 import EmojiPicker from "emoji-picker-react";
 import { IoEye } from "react-icons/io5";
 import { TiEdit } from "react-icons/ti";
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 import Profileview from "../drawers/profileview";
 import Mainprofile from "../drawers/mainprofile";
@@ -62,6 +63,15 @@ setfocused(true)
 
             
     }
+
+    const  changeUI=()=>{
+      let container=document.getElementById("containerwrapper");
+      let contacts=document.getElementById("contactswrapper");
+      if(contacts){
+        contacts.style.display="block";
+        container.style.display="none"
+      }
+    }
     const sendhandler=async()=>{
       console.log("running..................")
 
@@ -73,7 +83,9 @@ setfocused(true)
       let data=await fetch(`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/messages/addmsg`,{
       method:"POST",
       headers:{
-        'Content-Type':'application/json'
+        'Content-Type':'application/json',
+        'x-user-id':currentholder._id
+
       },
       body:JSON.stringify({
             txt:msg,
@@ -99,7 +111,15 @@ setfocused(true)
         console.log(data);
         
         settingmessageshandler(msg);
-        setmsg("")
+        setmsg("");
+        let element=document.getElementById("typinginput");
+        let inputelement=document.getElementById("inputwrapper");
+        let inputwrapper=document.getElementById("messagewrapper");
+        let messagecontainer=document.getElementById("messages");
+        element.style.height=`40px`;
+        inputelement.style.height=`60px`;
+        inputwrapper.style.height=`70px`;
+        messagecontainer.style.height=`${window.innerHeight-140}px`
       }
     
 
@@ -126,18 +146,21 @@ setshow(!show)
     }
     return (
       
-        <div className="containerwrapper">
+        <div className="containerwrapper" id="containerwrapper">
           {showmyprofile && <Mainprofile setcurrentchat={setcurrentchat} setcurrentholder={setcurrentholder} setshowmyprofile={setshowmyprofile} currentholder={currentholder}/>}
           {(!showmyprofile && showprofile) && <Profileview bgimg={bgimg} setbgimg={setbgimg} currentholder={currentholder} setshowprofile={setshowprofile} currentchat={currentchat}/>}
             {(currentchat && !showmyprofile) &&
             <Fragment>
             <div className="selecteduserdetails">
               <div className="detailswrapper">
+              {(window.innerWidth<600) && <IoMdArrowRoundBack className="backarrow" onClick={()=>{changeUI()}}/>}
             <img  className="profilepic" src={currentchat.avatarimage.startsWith("uploads")?`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/${currentchat.avatarimage}`:currentchat.avatarimage}/>
          
             <div className="username1">{currentchat.username}{currentchat===currentholder &&<div className="profiledowntext">message yourself</div> }</div></div>
             <div className="eyeiconwrapper" onClick={()=>{if(currentchat===currentholder){
+         
             
+        
               setshowmyprofile(!showmyprofile)
             }
             else{

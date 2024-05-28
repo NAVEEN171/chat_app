@@ -33,6 +33,7 @@ const Avatar = () => {
   const [previewurl,setpreviewurl]=useState("")
   const [selected,setselected]=useState("")
   const [file,setfile]=useState(null);
+  const [currenthold,setcurrenthold]=useState(null);
   useEffect(()=>{
     if(file!==null){
       if(selected!==""){
@@ -84,6 +85,11 @@ const Avatar = () => {
   setprevdiv(e.target)
     
   }
+  useEffect(()=>{
+       if(localStorage.getItem("chat with favos")){
+        setcurrenthold(JSON.parse(localStorage.getItem("chat with favos")));
+       }
+  },[])
   
 
   const submithandle=async(event)=>{
@@ -97,7 +103,9 @@ const Avatar = () => {
 
         method:"POST",
         headers:{
-          'Content-Type':'application/json'
+          'Content-Type':'application/json',
+          'x-user-id':currenthold._id
+
         },
         body:JSON.stringify({
           image:selected,
@@ -128,6 +136,12 @@ const Avatar = () => {
       {
         method:'POST'
        ,
+       headers:{
+        'Content-Type':'application/json',
+        'x-user-id':currenthold._id
+
+    }
+,
       body:formData}
       
        

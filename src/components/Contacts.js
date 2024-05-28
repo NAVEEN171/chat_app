@@ -7,7 +7,7 @@ import { useState } from "react";
 
 
 const Contacts=({changeactive,change,setmsgsent,msgsent,setcontacts,currenthold,contacts,changechat,setcurrentchat,currentchat,setshowmyprofile,showmyprofile})=>{
-    const [prevtouched,setprevtouched]=useState();
+    const [prevtouched,setprevtouched]=useState(null);
     const [presentcontacts,setpresentcontacts]=useState([]);
     const [presentstatus,setpresentstatus]=useState([])
     
@@ -17,7 +17,7 @@ const scrolldownhandler=()=>{
   if(element){
     console.log(element.scrollHeight)
     
-    element.scrollTop=element.scrollHeight;
+    element.scrollTop=element.scrollHeight+41.6;
   }
 }
 useEffect(()=>{
@@ -49,7 +49,9 @@ scrolldownhandler();
                   const data = await fetch(`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/messages/search`, {
                     method: "POST",
                     headers: {
-                      'Content-Type': 'application/json'
+                      'Content-Type': 'application/json',
+                      'x-user-id':currenthold._id
+
                     },
                     body: JSON.stringify({
                       userid: local._id,
@@ -107,7 +109,13 @@ scrolldownhandler();
          promises=contactinfo.map(async(user)=>{
             console.log("ids")
             console.log(user._id)
-            let data=await fetch(`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/getuser/${user._id}`);
+            let data=await fetch(`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/getuser/${user._id}`,  {method:"GET",
+            headers:{
+                'Content-Type':'application/json',
+                'x-user-id':currenthold._id
+       
+            }
+        });
             data=await data.json();
             console.log("currents")
             if(data){
@@ -140,30 +148,40 @@ scrolldownhandler();
     },[presentstatus])
   
    const clearmessages=(index)=>{
+    if(window.innerWidth<=600){
+    let container=document.getElementById("containerwrapper");
+    let contactswrapper=document.getElementById("contactswrapper");
+    if(container){
+      contactswrapper.style.display="none";
+      container.style.display="block";
+
+    }
+  }
+          
          if(presentcontacts.length>0 && presentcontacts[index].unseenmessages>0){
           presentcontacts[index]=0;
          }
    }
-    const selecthandler=(uid)=>{
+    const selecthandler=(index)=>{
         
-    if(prevtouched){
-        prevtouched.classList.remove("touched")
-    }
-    let current=document.getElementById(uid);
-     let current2=current.querySelector(".currentholdwrapper");
-    
-     if(current2){
-          current2.classList.add("touched");
-          setprevtouched(current2);
-     }
+    setprevtouched(index)
     }
    
     return(
-        <div className="contacts-wrapper">
+        <div className="contacts-wrapper" id="contactswrapper">
             <Main/>
             <div className="center" id="center">
             <div className="currentholdwrapper" onClick={()=>{
                 setcurrentchat(currenthold)
+                if(window.innerWidth<=600){  
+                  let container=document.getElementById("containerwrapper");
+        let contactswrapper=document.getElementById("contactswrapper");
+        if(container){
+          contactswrapper.style.display="none";
+          container.style.display="block";
+    
+        }
+      }
             let element=document.querySelector(".touched");
             if(element){
                 element.classList.remove("touched")
@@ -195,8 +213,8 @@ scrolldownhandler();
                     }
 
                     return(
-                    <div className="center" onClick={()=>{selecthandler(user._id);changechat(user);clearmessages(index)}} key={user._id} id={user._id}>
-                    <div className="currentholdwrapper">
+                    <div className="center" onClick={()=>{selecthandler(index);changechat(user);clearmessages(index)}} key={user._id} id={user._id}>
+                    <div className={index===prevtouched?"currentholdwrapper touched":"currentholdwrapper"}>
                       <div className="img-wrapper">
                         <img className="imagee" src={user.avatarimage.startsWith("uploads")?`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/${user.avatarimage}`:user.avatarimage}/>
                         <div className={presentstatus.length>0 && presentstatus[index]?.isactive===true?"active":"inactive"}></div>

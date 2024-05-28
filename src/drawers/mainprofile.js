@@ -78,7 +78,7 @@ const changehandler=(e)=>{
          }
   }
       return(
-        <div className="mainprofilewrapper">
+        <div className="mainprofilewrapper" id="mainprofilewrapper">
       <div className="mainprofile">
 
         <div className="arrowwrapper" onClick={()=>{setshowmyprofile(false)}}><IoMdArrowRoundBack style={{ height:"25px",

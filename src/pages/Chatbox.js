@@ -46,7 +46,9 @@ useEffect(()=>{
         method:"POST",
 
         headers:{
-            'Content-Type':'application/json'
+            'Content-Type':'application/json',
+            'x-user-id':currentholder._id
+
         },  
         body:JSON.stringify({
             userid:currentholder._id,
@@ -61,7 +63,9 @@ useEffect(()=>{
            let data2=await fetch(`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/changeroom/${data.id}`,{
             method:"POST",
             headers:{
-                'Content-Type':'application/json'
+                'Content-Type':'application/json',
+                'x-user-id':currentholder._id
+
             },  
             body:JSON.stringify({
                 user:currentholder._id,
@@ -77,7 +81,9 @@ useEffect(()=>{
                let data2=await fetch(`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/changeroom/${"Empty"}`,{
                  method:"POST",
                  headers:{
-                     'Content-Type':'application/json'
+                     'Content-Type':'application/json',
+                     'x-user-id':currentholder._id
+
                  },  
                  body:JSON.stringify({
                      user:currentholder._id,
@@ -110,7 +116,9 @@ Fetchdata();
         let data=await fetch(`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/messages/clearmessages/${joinedroom}`,{
             method:"POST",
             headers:{
-                'Content-Type':'application/json'
+                'Content-Type':'application/json',
+                'x-user-id':currentholder._id
+
             },
             body:JSON.stringify({
                 to:local._id
@@ -154,7 +162,9 @@ if(joinedroom===currentchat._id+currentholder._id || joinedroom===currentholder.
             let data=await fetch(`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/messages/search`,{
                 method:"POST",
                 headers:{
-                    'Content-Type':'application/json'
+                    'Content-Type':'application/json',
+                    'x-user-id':currentholder._id
+
                 },
                 body:JSON.stringify({
                     userid:currentholder._id,
@@ -234,7 +244,9 @@ if(joinedroom===currentchat._id+currentholder._id || joinedroom===currentholder.
             let data=await fetch(`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/messages/getmessages`,{
                 method:"POST",
                 headers:{
-                  'Content-Type':'application/json'
+                  'Content-Type':'application/json',
+                  'x-user-id':currentholder._id
+
                 },
                 body:JSON.stringify({
                     
@@ -310,7 +322,9 @@ if(joinedroom===currentchat._id+currentholder._id || joinedroom===currentholder.
         let data=await fetch(`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/status/${uid}`,{
             method:"POST",
             headers:{
-                'Content-Type':'application/json'
+                'Content-Type':'application/json',
+                'x-user-id':currentholder._id
+
               },
               body:JSON.stringify(
                 {type:"online"}
@@ -354,7 +368,9 @@ if(joinedroom===currentchat._id+currentholder._id || joinedroom===currentholder.
     let data=await fetch(`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/status/${useridentification}`,{
                     method:"POST",
                     headers:{
-                        'Content-Type':'application/json'
+                        'Content-Type':'application/json',
+                        'x-user-id':currentholder._id
+
                       },
                       body:JSON.stringify(
                         {type:"offline"}
@@ -372,7 +388,9 @@ if(joinedroom===currentchat._id+currentholder._id || joinedroom===currentholder.
                 let data2=await fetch(`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/changeroom/${"Empty"}`,{
                     method:"POST",
                     headers:{
-                        'Content-Type':'application/json'
+                        'Content-Type':'application/json',
+                        'x-user-id':currentholder._id
+
                     },  
                     body:JSON.stringify({
                         user:currentholder._id,
@@ -413,7 +431,15 @@ if(joinedroom===currentchat._id+currentholder._id || joinedroom===currentholder.
             const data=await JSON.parse(localStorage.getItem("chat with favos"))
             console.log("query")
         console.log(`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/getuser/${data.insertedId?data.insertedId : data._id}`)
-            let using=await fetch(`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/getuser/${data.insertedId?data.insertedId : data._id}`)
+            let using=await fetch(`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/getuser/${data.insertedId?data.insertedId : data._id}`,
+                {method:"GET",
+                    headers:{
+                        'Content-Type':'application/json',
+                        'x-user-id':data._id
+               
+                    }
+                }
+            )
         
             using=await using.json();
             console.log(using);
@@ -437,7 +463,15 @@ if(joinedroom===currentchat._id+currentholder._id || joinedroom===currentholder.
             const data2=await JSON.parse(localStorage.getItem("chat with favos"))
             console.log(data2);
         
-           let allusers=await fetch(`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/getallusers/${data.insertedId || data._id}`)
+           let allusers=await fetch(`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/getallusers/${data.insertedId || data._id}`,
+           {method:"GET",
+           headers:{
+               'Content-Type':'application/json',
+               'x-user-id':currentholder._id
+      
+           }
+       }
+           )
             
             allusers=await allusers.json();
             console.log(allusers);

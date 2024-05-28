@@ -128,3 +128,18 @@ justify-content: space-evenly;
     font-style: sans-serif;
 }
 
+@media(max-width:700px){
+    .profileview-wrapper{
+        width:320px;
+        height:320px;
+    }
+}
+@media(max-width:400px){
+    .profileview-wrapper{
+        width:85%;
+    }
+    .uploading{
+        width:70%;
+    }
+}
+
