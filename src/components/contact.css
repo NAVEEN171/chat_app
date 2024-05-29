@@ -129,6 +129,15 @@
     text-indent:5px;
 
 }
+.allusersalt{
+    height:calc(100% - 220px);
+    width:100%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+
+}
 .changeinput{
     display:flex;
     align-items: center;

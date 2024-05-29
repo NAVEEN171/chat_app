@@ -31,11 +31,14 @@ useEffect(()=>{
              let cons=[...contacts]
            
              
-             let filteredarray=cons.filter((contact)=>contact.username.includes(search));
+             let filteredarray=cons.filter((contact)=>contact.username.toLowerCase().includes(search.toLowerCase()));
              if(filteredarray.length>0){
               console.log("Filtered contacts:", filteredarray); // Log the filtered contacts
 
               setcontacts(filteredarray);
+             }
+             else{
+              setcontacts([]);
              }
        }
        else{
@@ -236,7 +239,7 @@ useEffect(()=>{
                <div className="changeinput">
                <input className="inputname" value={search} onChange={(e)=>{setsearch(e.target.value)}}  placeholder="search..."></input>
                </div>
-               <div className="allusers">
+           { (contacts.length>0 ) &&   <div className="allusers">
                 {contacts && contacts.map((user,index)=>{
                     let dateObject=null;
                     let hours=null;
@@ -272,7 +275,12 @@ useEffect(()=>{
                         </div>
                 )})}
 
-               </div>
+               </div>}
+               {(contacts.length===0 && search!=="") && 
+               <div className="allusersalt">
+              <div>no results found</div> 
+              </div>
+               }
         
         </div>
     )
