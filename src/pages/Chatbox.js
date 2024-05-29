@@ -11,7 +11,7 @@ import Contacts from "../components/Contacts";
 var socket;
 
 const Chatbox=()=>{
-    
+    const [scrolldown,setscrolldown]=useState(null);
     const [currentholder,setcurrentholder]=useState({});
     const [connsocket,setconnsocket]=useState(false);
     const [connected,setconnected]=useState(0);
@@ -289,7 +289,13 @@ if(joinedroom===currentchat._id+currentholder._id || joinedroom===currentholder.
                     
                     
                    
-                    searchname()
+                    searchname();
+                    if(scrolldown===null){
+                      setscrolldown(true);
+                    }
+                    else{
+                        setscrolldown(!scrolldown);
+                    }
                 }
                 console.log(data);
                 if(data){
@@ -356,6 +362,12 @@ if(joinedroom===currentchat._id+currentholder._id || joinedroom===currentholder.
            setmsgss([...msgss,message.lastelement]);
            
            setchange(!change);
+           if(scrolldown===null){
+            setscrolldown(true);
+          }
+          else{
+              setscrolldown(!scrolldown);
+          }
            
            
 
@@ -422,7 +434,24 @@ if(joinedroom===currentchat._id+currentholder._id || joinedroom===currentholder.
           };
  } })
  
+const local=async()=>{
+    let data2=await fetch(`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/changeroom/${"Empty"}`,{
+        method:"POST",
+        headers:{
+            'Content-Type':'application/json',
+            'x-user-id':currentholder._id
 
+        },  
+        body:JSON.stringify({
+            user:currentholder._id,
+        })
+
+       });
+       if(data2){
+           data2=await data2.json()
+       }
+
+}
     useEffect(()=>{
         const run=async()=>{
             
@@ -485,7 +514,8 @@ if(joinedroom===currentchat._id+currentholder._id || joinedroom===currentholder.
         }
     }
         run();
-    },[])
+        local()
+    },[]);
     
     
     
@@ -493,7 +523,7 @@ if(joinedroom===currentchat._id+currentholder._id || joinedroom===currentholder.
    
          return(
 <div className="chatbox">
-    <Contacts  changeactive={changeactive} change={change}msgsent={msgsent} setmsgsent={setmsgsent} setcontacts={setcontacts} currenthold={currentholder} setcurrentchat={setcurrentchat} currentchat={currentchat} showmyprofile={showmyprofile} setshowmyprofile={setshowmyprofile} contacts={contacts} changechat={changechathandler}/>
+    <Contacts scrolldown={scrolldown}  changeactive={changeactive} setchangeactive={setchangeactive} change={change}msgsent={msgsent} setmsgsent={setmsgsent} setcontacts={setcontacts} currenthold={currentholder} setcurrentchat={setcurrentchat} currentchat={currentchat} showmyprofile={showmyprofile} setshowmyprofile={setshowmyprofile} contacts={contacts} changechat={changechathandler}/>
     <Chatcontainer setbgimg={setbgimg} bgimg={bgimg} setcurrentchat={setcurrentchat} setcurrentholder={setcurrentholder} changechathandler={changechathandler} setcurrentroomid={setcurrentroomid} showprofile={showprofile} setshowmyprofile={setshowmyprofile} showmyprofile={showmyprofile} setshowprofile={setshowprofile} currentchatmsgs={msgss} settingmessageshandler={settingmessageshandler} currentchat={currentchat} currentholder={currentholder}/>
 </div>
          )

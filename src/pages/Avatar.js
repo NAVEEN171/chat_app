@@ -11,7 +11,7 @@ const avengers=[
        },{
         image:"https://e0.pxfuel.com/wallpapers/468/165/desktop-wallpaper-iron-man-snap-iron-man-endgame.jpg"
        },{
-        image:"https://www.hdwallpapers.in/download/captain_america_with_shield_and_stormbreaker_4k_hd_captain_america-3840x2160.jpg"
+        image:"https://tse2.mm.bing.net/th?id=OIP.a9MlY9tJi8HfavzmsD_F4gAAAA&pid=Api&P=0&h=180"
        },{
         image:"https://avatars.mds.yandex.net/i?id=a888ef14679aad1efabbd454c63de8805eee541b-9225598-images-thumbs&n=13"
        },{
@@ -98,7 +98,7 @@ const Avatar = () => {
       const user=await JSON.parse(localStorage.getItem("chat with favos"));
 
       console.log(user)
-      let data=await fetch(`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/${user.insertedId || user._id}`,
+      let data=await fetch(`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/Setavatar/${user.insertedId || user._id}`,
       {
 
         method:"POST",

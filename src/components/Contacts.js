@@ -6,7 +6,7 @@ import { useState } from "react";
 
 
 
-const Contacts=({changeactive,change,setmsgsent,msgsent,setcontacts,currenthold,contacts,changechat,setcurrentchat,currentchat,setshowmyprofile,showmyprofile})=>{
+const Contacts=({scrolldown,changeactive,setchangeactive,change,setmsgsent,msgsent,setcontacts,currenthold,contacts,changechat,setcurrentchat,currentchat,setshowmyprofile,showmyprofile})=>{
     const [prevtouched,setprevtouched]=useState(null);
     const [presentcontacts,setpresentcontacts]=useState([]);
     const [presentstatus,setpresentstatus]=useState([])
@@ -17,16 +17,16 @@ const scrolldownhandler=()=>{
   if(element){
     console.log(element.scrollHeight)
     
+    
     element.scrollTop=element.scrollHeight;
   }
 }
 useEffect(()=>{
-if(currentchat!==null){
-  console.log("selectedchat")
-console.log(currentchat)
-scrolldownhandler();
+if(scrolldown!==null){
+  setTimeout(()=>{scrolldownhandler()},100);
 }
-},[currentchat])
+
+},[scrolldown])
 
     useEffect(() => {
         const getMessages = async () => {
@@ -82,7 +82,6 @@ scrolldownhandler();
       
           await Promise.all(promises);
           setpresentcontacts([...cons]);
-          setTimeout(()=>{scrolldownhandler()},200);
           
         };
       
@@ -160,6 +159,7 @@ scrolldownhandler();
           
          if(presentcontacts.length>0 && presentcontacts[index].unseenmessages>0){
           presentcontacts[index]=0;
+          setchangeactive(!changeactive)
          }
    }
     const selecthandler=(index)=>{

@@ -44,7 +44,9 @@
     height:70px;
     width:100%;
 }
-
+#messagecontainer{
+    scroll-behavior: smooth;
+}
 .messagewrapper{
     position: relative;
     height:70px;
