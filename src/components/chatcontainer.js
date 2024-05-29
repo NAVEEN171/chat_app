@@ -11,6 +11,7 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 import Profileview from "../drawers/profileview";
 import Mainprofile from "../drawers/mainprofile";
 import io from "socket.io-client";
+import { containerClasses } from "@mui/system";
 var socket;
 
 
@@ -27,6 +28,16 @@ setfocused(true)
     const blurhandler=()=>{
       setfocused(false);
     }
+
+    useEffect(()=>{
+      let containerwrapper=document.getElementById("containerwrapper");
+      let messageswrapper=document.getElementById("messages");
+      if(containerwrapper && window.innerWidth<=600){
+        containerwrapper.style.height=`${window.innerHeight}px`;
+
+        
+      }
+    },[])
 
   
 
@@ -47,7 +58,13 @@ setfocused(true)
             target.style.height=`40px`;
               inputelement.style.height=`60px`;
               inputwrapper.style.height=`70px`;
+              if(window.innerWidth>600){
               messagecontainer.style.height=`calc(100% - 140px)`
+              }
+              else{
+                messagecontainer.style.height=`${window.innerHeight-(parseInt(inputwrapper.style.height))-70}px`
+
+              }
       }
     }
     const messagechangehandle=(e)=>{
@@ -65,13 +82,19 @@ setfocused(true)
             e.target.style.height=`40px`;
               inputelement.style.height=`60px`;
               inputwrapper.style.height=`70px`;
-            
+            if(window.innerWidth>600){
               messagecontainer.style.height=`calc(100% - 140px)`
+            }
+            else{
+              messagecontainer.style.height=`${window.innerHeight - 140}px`
+
+            }
             if(target.scrollHeight<250){
               
                   e.target.style.height=`${target.scrollHeight-20}px`;
              inputelement.style.height=`${target.scrollHeight}px`;
             inputwrapper.style.height=`${target.scrollHeight+10}px`;
+            if(window.innerWidth>600){
           let computedStyle = window.getComputedStyle(containerwrapper);
 
           let heightValue = computedStyle.getPropertyValue('height');
@@ -79,6 +102,11 @@ setfocused(true)
           console.log(heightValue);
           console.log(containerwrapper.style.height);
             messagecontainer.style.height=`${heightValue-(parseInt(inputwrapper.style.height))-70}px`
+            }
+            else{
+              messagecontainer.style.height=`${window.innerHeight-(parseInt(inputwrapper.style.height))-70}px`
+
+            }
           
 
             }
@@ -86,7 +114,7 @@ setfocused(true)
               e.target.style.height=`250px`;
               inputelement.style.height=`270px`;
              inputwrapper.style.height=`280px`;
-            
+            if(window.innerWidth>600){
              let computedStyle = window.getComputedStyle(containerwrapper);
 
           let heightValue = computedStyle.getPropertyValue('height');
@@ -95,6 +123,11 @@ setfocused(true)
            
              messagecontainer.style.height=`${heightValue-(parseInt(inputwrapper.style.height))-70}px`
               console.log("less")
+            }
+            else{
+              messagecontainer.style.height=`${window.innerHeight-(parseInt(inputwrapper.style.height))-70}px`
+
+            }
             }
             console.log(target.scrollHeight)
           
@@ -176,6 +209,11 @@ setshow(!show)
       console.log("currentchat");
       console.log(currentchat);
       setmsg("")
+      let messageswrapper=document.getElementById("messages");
+      if(messageswrapper && window.innerWidth<=600){
+      messageswrapper.style.height=`${window.innerHeight - 140}px`;
+      }
+
     },[currentchat])
     const handleemojiclick=(event,emoji)=>{
       console.log(event)
@@ -194,7 +232,7 @@ setshow(!show)
             <Fragment>
             <div className="selecteduserdetails">
               <div className="detailswrapper">
-              {(window.innerWidth<600) && <IoMdArrowRoundBack className="backarrow" onClick={()=>{changeUI()}}/>}
+              {(window.innerWidth<=600) && <IoMdArrowRoundBack className="backarrow" onClick={()=>{changeUI()}}/>}
             <img  className="profilepic" src={currentchat.avatarimage!==""?currentchat.avatarimage:"https://cdn4.iconfinder.com/data/icons/user-people-2/48/6-1024.png"}/>
          
             <div className="username1">{currentchat.username}{currentchat===currentholder &&<div className="profiledowntext">message yourself</div> }</div></div>
