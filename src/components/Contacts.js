@@ -9,7 +9,10 @@ import { useState } from "react";
 const Contacts=({scrolldown,changeactive,setchangeactive,change,setmsgsent,msgsent,setcontacts,currenthold,contacts,changechat,setcurrentchat,currentchat,setshowmyprofile,showmyprofile})=>{
     const [prevtouched,setprevtouched]=useState(null);
     const [presentcontacts,setpresentcontacts]=useState([]);
-    const [presentstatus,setpresentstatus]=useState([])
+    const [originalcontacts,setoriginalcontacts]=useState([]);
+    const [presentstatus,setpresentstatus]=useState([]);
+    const [search,setsearch]=useState("");
+    const [take,settake]=useState(0);
     
 const scrolldownhandler=()=>{
   let element=document.getElementById("messagecontainer");
@@ -21,13 +24,39 @@ const scrolldownhandler=()=>{
     element.scrollTop=element.scrollHeight;
   }
 }
+
+useEffect(()=>{
+       if(search!==""){
+        console.log("search is ",search)
+             let cons=[...contacts]
+           
+             
+             let filteredarray=cons.filter((contact)=>contact.username.includes(search));
+             if(filteredarray.length>0){
+              console.log("Filtered contacts:", filteredarray); // Log the filtered contacts
+
+              setcontacts(filteredarray);
+             }
+       }
+       else{
+        setcontacts(originalcontacts)
+       }
+},[search])
 useEffect(()=>{
 if(scrolldown!==null){
   setTimeout(()=>{scrolldownhandler()},100);
 }
 
 },[scrolldown])
-
+useEffect(()=>{
+  if(contacts.length>0 && take===0){
+    setoriginalcontacts(contacts);
+    console.log("original contacts");
+    console.log(originalcontacts);
+    settake(1);
+  }
+},[contacts]
+)
     useEffect(() => {
         const getMessages = async () => {
           let local;
@@ -204,6 +233,9 @@ if(scrolldown!==null){
                 </div>
                 </div>
                <div className="usertext">users</div> 
+               <div className="changeinput">
+               <input className="inputname" value={search} onChange={(e)=>{setsearch(e.target.value)}}  placeholder="search..."></input>
+               </div>
                <div className="allusers">
                 {contacts && contacts.map((user,index)=>{
                     let dateObject=null;
