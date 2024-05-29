@@ -144,7 +144,6 @@
     justify-content: center;
     width:100%;
     height:40px;
-    width:90%;
 }
 .inputname:focus{
     border-bottom: 2px solid #ce1eed;
