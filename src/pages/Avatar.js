@@ -3,6 +3,17 @@ import { Fragment } from 'react'
 import { useState,useEffect,useRef} from 'react'
 import { useNavigate } from 'react-router-dom'
 import "./avatar.css"
+import {v4} from "uuid";
+import {storage } from "../firebase"
+
+import {
+    ref,
+    uploadBytes,
+    getDownloadURL,
+    listAll,
+    list,
+    deleteObject
+  } from "firebase/storage";
 const avengers=[
        {
         image:"https://images.hdqwalls.com/wallpapers/spiderman-2002-q0.jpg"
@@ -122,17 +133,20 @@ const Avatar = () => {
       navigate("/");
      }
      else if(fileref.current.value!==null){
-      const formData=new FormData();
       const user=await JSON.parse(localStorage.getItem("chat with favos"));
+      const imageRef=ref(storage,`newuploads/${file.name }`)
+ let data2=await uploadBytes(imageRef,file);
+ let url;
+ if(data2){
+    url=await getDownloadURL(data2.ref)
+    console.log(url)
+ }
       
-      formData.append("image",file);
-    
-
-      for (const pair of formData.entries()) {
-        console.log(pair[0], pair[1]);
-      } 
+      
       try{
-       let data=await fetch(`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/Setavatarfile/${user.insertedId || user._id}`,
+        let data;
+        if(url){
+        data=await fetch(`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/Setavatar/${user.insertedId || user._id}`,
       {
         method:'POST'
        ,
@@ -142,17 +156,20 @@ const Avatar = () => {
 
     }
 ,
-      body:formData}
+      body:JSON.stringify({
+        image:url,
+      })}
       
        
        )
+      }
        if(data){
        data=await data.json();
        console.log(data.details)
        let local=JSON.parse(localStorage.getItem("chat with favos"));
        console.log(local)
-       local.setavatar=data.details.setavatar;
-       local.avatarimage=data.details.avatarimage;
+       local.setavatar=data.setavatar;
+       local.avatarimage=data.avatarimage;
        console.log(local)
        localStorage.setItem("chat with favos",JSON.stringify(local))
        navigate("/")
