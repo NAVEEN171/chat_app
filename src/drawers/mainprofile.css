@@ -85,6 +85,9 @@ transition: all 0.2s;
     margin-left: 10px;
 }
 .changephotobutt{
+    word-wrap: break-word;
+    max-width:90%; /* This will break long words and wrap them to the next line */
+
     padding:7px;
     border-radius: 5px;
     font-size: 20px;

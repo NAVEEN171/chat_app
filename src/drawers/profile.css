@@ -133,6 +133,12 @@ justify-content: space-evenly;
         width:320px;
         height:320px;
     }
+    .users{
+        font-size:20px;
+    }
+    .changephotobutton{
+        font-size: 17px;
+    }
 }
 @media(max-width:400px){
     .profileview-wrapper{
@@ -140,6 +146,12 @@ justify-content: space-evenly;
     }
     .uploading{
         width:70%;
+    }
+    .users{
+        font-size:17px;
+    }
+    .changephotobutton{
+        font-size:15px ;
     }
 }
 
