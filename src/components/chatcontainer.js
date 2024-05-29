@@ -45,7 +45,7 @@ setfocused(true)
             target.style.height=`40px`;
               inputelement.style.height=`60px`;
               inputwrapper.style.height=`70px`;
-              messagecontainer.style.height=`${window.innerHeight-140}px`
+              messagecontainer.style.height=`calc(100% - 140px)`
       }
     }
     const messagechangehandle=(e)=>{
@@ -56,26 +56,39 @@ setfocused(true)
             let inputelement=document.getElementById("inputwrapper");
             let inputwrapper=document.getElementById("messagewrapper");
             let messagecontainer=document.getElementById("messages");
+            let containerwrapper=document.getElementById("containerwrapper");
+            console.log(containerwrapper)
+
             console.log(messagecontainer);
             e.target.style.height=`40px`;
               inputelement.style.height=`60px`;
               inputwrapper.style.height=`70px`;
-              messagecontainer.style.height=`${window.innerHeight-140}px`
+              messagecontainer.style.height=`calc(100% - 140px)`
             if(target.scrollHeight<250){
               
                   e.target.style.height=`${target.scrollHeight-20}px`;
              inputelement.style.height=`${target.scrollHeight}px`;
             inputwrapper.style.height=`${target.scrollHeight+10}px`;
-          
-            messagecontainer.style.height=`${window.innerHeight-(parseInt(inputwrapper.style.height))-70}px`
-            console.log(window.innerHeight-70-parseInt(inputwrapper.style.height));
+          let computedStyle = window.getComputedStyle(containerwrapper);
+
+          let heightValue = computedStyle.getPropertyValue('height');
+          heightValue=parseInt(heightValue);
+          console.log(heightValue);
+          console.log(containerwrapper.style.height);
+            messagecontainer.style.height=`${heightValue-(parseInt(inputwrapper.style.height))-70}px`
+            console.log(heightValue-70-parseInt(inputwrapper.style.height));
             }
             else{
               e.target.style.height=`250px`;
               inputelement.style.height=`270px`;
              inputwrapper.style.height=`280px`;
+             let computedStyle = window.getComputedStyle(containerwrapper);
+
+          let heightValue = computedStyle.getPropertyValue('height');
+          heightValue=parseInt(heightValue);
+          console.log(heightValue);
            
-             messagecontainer.style.height=`${window.innerHeight-(parseInt(inputwrapper.style.height))-70}px`
+             messagecontainer.style.height=`${heightValue-(parseInt(inputwrapper.style.height))-70}px`
               console.log("less")
             }
             console.log(target.scrollHeight)
@@ -141,7 +154,7 @@ setfocused(true)
         element.style.height=`40px`;
         inputelement.style.height=`60px`;
         inputwrapper.style.height=`70px`;
-        messagecontainer.style.height=`${window.innerHeight-140}px`
+        messagecontainer.style.height=`calc(100% - 140px)`
       }
     
 
@@ -156,7 +169,8 @@ setshow(!show)
     }
     useEffect(()=>{
       console.log("currentchat");
-      console.log(currentchat)
+      console.log(currentchat);
+      setmsg("")
     },[currentchat])
     const handleemojiclick=(event,emoji)=>{
       console.log(event)
@@ -176,7 +190,7 @@ setshow(!show)
             <div className="selecteduserdetails">
               <div className="detailswrapper">
               {(window.innerWidth<600) && <IoMdArrowRoundBack className="backarrow" onClick={()=>{changeUI()}}/>}
-            <img  className="profilepic" src={currentchat.avatarimage.startsWith("uploads")?`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/${currentchat.avatarimage}`:currentchat.avatarimage}/>
+            <img  className="profilepic" src={currentchat.avatarimage!==""?currentchat.avatarimage:"https://cdn4.iconfinder.com/data/icons/user-people-2/48/6-1024.png"}/>
          
             <div className="username1">{currentchat.username}{currentchat===currentholder &&<div className="profiledowntext">message yourself</div> }</div></div>
             <div className="eyeiconwrapper" onClick={()=>{if(currentchat===currentholder){

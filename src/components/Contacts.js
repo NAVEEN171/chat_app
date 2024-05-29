@@ -158,7 +158,13 @@ if(scrolldown!==null){
   }
           
          if(presentcontacts.length>0 && presentcontacts[index].unseenmessages>0){
-          presentcontacts[index]=0;
+          console.log("concs are")
+          let concs=[...presentcontacts];
+          console.log(concs)
+          concs[index].unseenmessages=0;
+          console.log("after");
+          console.log(concs)
+          setpresentcontacts(concs);
           setchangeactive(!changeactive)
          }
    }
@@ -188,7 +194,7 @@ if(scrolldown!==null){
             }
                 }}>
                   <div className="img-wrapper">
-                <img className="imagee" src={currenthold.avatarimage?.startsWith("uploads")?`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/${currenthold.avatarimage}`:currenthold.avatarimage}/>
+                <img className="imagee" src={currenthold.avatarimage?currenthold.avatarimage:"https://cdn4.iconfinder.com/data/icons/user-people-2/48/6-1024.png"}/>
                 </div>
                 <div className="textwrapper">
                 <div className="username">{currenthold.username}</div>
@@ -216,7 +222,7 @@ if(scrolldown!==null){
                     <div className="center" onClick={()=>{selecthandler(index);changechat(user);clearmessages(index)}} key={user._id} id={user._id}>
                     <div className={index===prevtouched?"currentholdwrapper touched":"currentholdwrapper"}>
                       <div className="img-wrapper">
-                        <img className="imagee" src={user.avatarimage.startsWith("uploads")?`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/${user.avatarimage}`:user.avatarimage}/>
+                        <img className="imagee" src={user.avatarimage?user.avatarimage:"https://cdn4.iconfinder.com/data/icons/user-people-2/48/6-1024.png"}/>
                         <div className={presentstatus.length>0 && presentstatus[index]?.isactive===true?"active":"inactive"}></div>
                         </div>
                         <div className="textwrapper">
