@@ -28,6 +28,20 @@ setfocused(true)
       setfocused(false);
     }
 
+    useEffect(()=>{ 
+     let containerwrapper=document.getElementById("containerwrapper");
+     console.log(containerwrapper)
+     console.log(window.innerHeight)
+    if(containerwrapper){
+        if(window.innerWidth<=600){
+          console.log(containerwrapper)
+          
+        containerwrapper.style.height=`${window.innerHeight}px`;
+        console.log(containerwrapper.style.height);
+
+        }
+    }},[])
+
     const handleKeyDown=(event)=>{
       console.log("key pressed")
       console.log(event.key)
@@ -63,12 +77,14 @@ setfocused(true)
             e.target.style.height=`40px`;
               inputelement.style.height=`60px`;
               inputwrapper.style.height=`70px`;
+            
               messagecontainer.style.height=`calc(100% - 140px)`
             if(target.scrollHeight<250){
               
                   e.target.style.height=`${target.scrollHeight-20}px`;
              inputelement.style.height=`${target.scrollHeight}px`;
             inputwrapper.style.height=`${target.scrollHeight+10}px`;
+          if(window.innerWidth>600){  
           let computedStyle = window.getComputedStyle(containerwrapper);
 
           let heightValue = computedStyle.getPropertyValue('height');
@@ -76,12 +92,21 @@ setfocused(true)
           console.log(heightValue);
           console.log(containerwrapper.style.height);
             messagecontainer.style.height=`${heightValue-(parseInt(inputwrapper.style.height))-70}px`
-            console.log(heightValue-70-parseInt(inputwrapper.style.height));
+          }
+          else{
+            messagecontainer.style.height=`${window.innerHeight-(parseInt(inputwrapper.style.height))-70}px`
+
+          }
             }
             else{
               e.target.style.height=`250px`;
               inputelement.style.height=`270px`;
              inputwrapper.style.height=`280px`;
+             if(window.innerWidth<=600){
+              messagecontainer.style.height=`${window.innerHeight-(parseInt(inputwrapper.style.height))-70}px`
+
+             }
+             else{
              let computedStyle = window.getComputedStyle(containerwrapper);
 
           let heightValue = computedStyle.getPropertyValue('height');
@@ -90,6 +115,7 @@ setfocused(true)
            
              messagecontainer.style.height=`${heightValue-(parseInt(inputwrapper.style.height))-70}px`
               console.log("less")
+             }
             }
             console.log(target.scrollHeight)
           

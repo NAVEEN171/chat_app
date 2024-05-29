@@ -36,7 +36,9 @@ const Chatbox=()=>{
     const [futuretime,setfuturetime]=useState(null);
     console.log(date);
 
-      const navigate=useNavigate()
+      const navigate=useNavigate();
+
+      
       
 useEffect(()=>{
     const Fetchdata=async()=>{
@@ -513,6 +515,7 @@ const local=async()=>{
           navigate("/Login")
         }
     }
+   
         run();
         local()
     },[]);
