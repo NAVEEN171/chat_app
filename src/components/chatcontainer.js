@@ -47,7 +47,7 @@ setfocused(true)
             target.style.height=`40px`;
               inputelement.style.height=`60px`;
               inputwrapper.style.height=`70px`;
-              messagecontainer.style.height=`calc(100% - 140px)`
+              messagecontainer.style.height=`calc(100dvh - 140px)`
       }
     }
     const messagechangehandle=(e)=>{
@@ -66,7 +66,7 @@ setfocused(true)
               inputelement.style.height=`60px`;
               inputwrapper.style.height=`70px`;
             
-              messagecontainer.style.height=`calc(100% - 140px)`
+              messagecontainer.style.height=`calc(100dvh - 140px)`
             if(target.scrollHeight<250){
               
                   e.target.style.height=`${target.scrollHeight-20}px`;
@@ -159,7 +159,7 @@ setfocused(true)
         element.style.height=`40px`;
         inputelement.style.height=`60px`;
         inputwrapper.style.height=`70px`;
-        messagecontainer.style.height=`calc(100% - 140px)`
+        messagecontainer.style.height=`calc(100dvh - 140px)`
       }
     
 

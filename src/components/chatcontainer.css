@@ -1,7 +1,7 @@
 .containerwrapper{
     position: relative;
     width:75%;
-    height:100vh;
+    height:100dvh;
     overflow: hidden;
     
 }
@@ -9,7 +9,7 @@
     display:flex;
     align-items: center;
     justify-content: center;
-    height:100vh;
+    height:100dvh;
     background-color: rgb(219, 220, 255);
 
 }

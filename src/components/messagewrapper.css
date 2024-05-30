@@ -1,7 +1,7 @@
 .messages{
     position: relative;
     width:100%;
-  height:calc(100vh - 140px);
+  height:calc(100dvh - 140px);
   overflow-y: auto;
   background-position: center;
   background-repeat: no-repeat;
