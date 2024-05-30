@@ -26,7 +26,7 @@ const scrolldownhandler=()=>{
 }
 
 useEffect(()=>{
-       if(search!==""){
+       if(search!=="" && contacts.length>0){
         console.log("search is ",search)
              let cons=[...contacts]
            
@@ -41,6 +41,16 @@ useEffect(()=>{
               setcontacts([]);
              }
        }
+        else if(search!=="" && contacts.length===0){
+             let cons=[...originalcontacts]
+           
+             
+             let filteredarray=cons.filter((contact)=>contact.username.toLowerCase().includes(search.toLowerCase()));
+             if(filteredarray.length>0){
+              console.log("Filtered contacts:", filteredarray); // Log the filtered contacts
+
+              setcontacts(filteredarray);
+        }
        else{
         setcontacts(originalcontacts)
        }
@@ -254,8 +264,8 @@ useEffect(()=>{
                     }
 
                     return(
-                    <div className="center" onClick={()=>{selecthandler(index);changechat(user);clearmessages(index)}} key={user._id} id={user._id}>
-                    <div className={index===prevtouched?"currentholdwrapper touched":"currentholdwrapper"}>
+                    <div className="center" onClick={()=>{selecthandler(user._id);changechat(user);clearmessages(index)}} key={user._id} id={user._id}>
+                    <div className={user._id===prevtouched?"currentholdwrapper touched":"currentholdwrapper"}>
                       <div className="img-wrapper">
                         <img className="imagee" src={user.avatarimage?user.avatarimage:"https://cdn4.iconfinder.com/data/icons/user-people-2/48/6-1024.png"}/>
                         <div className={presentstatus.length>0 && presentstatus[index]?.isactive===true?"active":"inactive"}></div>
