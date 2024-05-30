@@ -51,6 +51,13 @@ setfocused(true)
       }
     }
     const messagechangehandle=(e)=>{
+      if(window.innerWidth<=600){
+        let element=document.getElementById("containerwrapper");
+        if(element){
+          element.scrollTop=element.scrollHeight;
+
+        }
+      }
 
             setmsg(e.target.value);
             console.log(msg);
