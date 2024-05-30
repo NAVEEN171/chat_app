@@ -97,7 +97,7 @@ import { useState,useEffect} from "react";
             if(event.target.name==="password" && event.target.value.trim().length<8){
                   seterrors({...errors,"password_error":"minimum length of password is 8"})
             }
-            if(event.target.name==="password" && event.target.value.trim().length>8){
+            if(event.target.name==="password" && event.target.value.trim().length>=8){
 
                   seterrors({...errors,"password_error":""})
             }
