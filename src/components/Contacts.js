@@ -50,6 +50,7 @@ useEffect(()=>{
               console.log("Filtered contacts:", filteredarray); // Log the filtered contacts
 
               setcontacts(filteredarray);
+             }
         }
        else{
         setcontacts(originalcontacts)
