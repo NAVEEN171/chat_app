@@ -240,8 +240,8 @@ if(joinedroom===currentchat._id+currentholder._id || joinedroom===currentholder.
     useEffect(()=>{
         const runmsg=async()=>{
         if(currentchat!==null ){
-            setmsgss([])
-            setbgimg("")
+        
+            
             console.log("running msgs")
             console.log(currentchat._id);
             console.log(currentholder._id);
