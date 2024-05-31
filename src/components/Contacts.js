@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import "./contact.css"
 import Main from "./Main";
 import { useState } from "react";
+import {Oval} from "react-loader-spinner";
 
 
 
@@ -13,6 +14,8 @@ const Contacts=({scrolldown,changeactive,setchangeactive,change,setmsgsent,msgse
     const [presentstatus,setpresentstatus]=useState([]);
     const [search,setsearch]=useState("");
     const [take,settake]=useState(0);
+    const [load,setload]=useState(0);
+    const [loading,setloading]=useState(false);
     
 const scrolldownhandler=()=>{
   let element=document.getElementById("messagecontainer");
@@ -26,7 +29,7 @@ const scrolldownhandler=()=>{
 }
 
 useEffect(()=>{
-       if(search!==""){
+       if(search!=="" && contacts.length>0){
         console.log("search is ",search)
              let cons=[...contacts]
            
@@ -35,14 +38,25 @@ useEffect(()=>{
              if(filteredarray.length>0){
               console.log("Filtered contacts:", filteredarray); // Log the filtered contacts
 
-              setcontacts(filteredarray);
+              setpresentcontacts(filteredarray);
              }
              else{
-              setcontacts([]);
+              setpresentcontacts([]);
              }
        }
+        else if(search!=="" && contacts.length===0){
+             let cons=[...originalcontacts]
+           
+             
+             let filteredarray=cons.filter((contact)=>contact.username.toLowerCase().includes(search.toLowerCase()));
+             if(filteredarray.length>0){
+              console.log("Filtered contacts:", filteredarray); // Log the filtered contacts
+
+              setpresentcontacts(filteredarray);
+             }
+        }
        else{
-        setcontacts(originalcontacts)
+        setpresentcontacts(originalcontacts)
        }
 },[search])
 useEffect(()=>{
@@ -70,7 +84,7 @@ useEffect(()=>{
             if (localStorage.getItem("chat with favos")) {
               local = JSON.parse(localStorage.getItem("chat with favos"));
             }
-            cons = [...contacts];
+            cons =search!==""?[...presentcontacts]:[...contacts];
             console.log("i think msg recieved")
             console.log(cons);
       
@@ -113,7 +127,45 @@ useEffect(()=>{
           }
       
           await Promise.all(promises);
-          setpresentcontacts([...cons]);
+  let emptymessages=[];
+  let messageArray=[]
+  cons.forEach((contact)=>{
+    console.log(contact)
+    if( contact.lastmessage===null){
+      emptymessages.push(contact);
+      
+    }
+    else{
+      messageArray.push(contact)
+    }
+  });
+  console.log(messageArray);
+  if(messageArray.length>0){
+    messageArray.sort((a,b)=>{
+      return new Date(b.lastmessage.timestamps)-new Date(a.lastmessage.timestamps);
+    })
+  }
+    console.log("arrays");
+    console.log("equal");
+    console.log(messageArray.length+emptymessages.length===originalcontacts.length);
+    console.log(messageArray.length,emptymessages.length,originalcontacts.length)
+           if(messageArray.length+emptymessages.length===contacts.length){
+            setoriginalcontacts([...messageArray,...emptymessages]);
+            setpresentcontacts([...messageArray,...emptymessages]);
+            setchangeactive(!changeactive);
+            if(load===0){
+              setload(1);
+            }
+
+           }
+           else{
+            setpresentcontacts([...messageArray,...emptymessages]);
+            setchangeactive(!changeactive);
+            if(load===0){
+              setload(1);
+            }
+
+           }
           
         };
       
@@ -130,7 +182,7 @@ useEffect(()=>{
       useEffect(()=>{
         let users=[]
         let promises=[]
-        let contactinfo=[...contacts]
+        let contactinfo=[...presentcontacts]
         console.log("i am running")
         const activestatus=async()=>{
   
@@ -167,7 +219,7 @@ useEffect(()=>{
         }
   
        
-      },[contacts,changeactive])
+      },[presentcontacts,changeactive])
      
       
     useEffect(()=>{
@@ -239,8 +291,8 @@ useEffect(()=>{
                <div className="changeinput">
                <input className="inputname" value={search} onChange={(e)=>{setsearch(e.target.value)}}  placeholder="search..."></input>
                </div>
-           { (contacts.length>0 ) &&   <div className="allusers">
-                {contacts && contacts.map((user,index)=>{
+           { (presentcontacts.length>0 ) &&   <div className="allusers">
+                {presentcontacts && presentcontacts.map((user,index)=>{
                     let dateObject=null;
                     let hours=null;
                     let minutes=null;
@@ -254,8 +306,8 @@ useEffect(()=>{
                     }
 
                     return(
-                    <div className="center" onClick={()=>{selecthandler(index);changechat(user);clearmessages(index)}} key={user._id} id={user._id}>
-                    <div className={index===prevtouched?"currentholdwrapper touched":"currentholdwrapper"}>
+                    <div className="center" onClick={()=>{selecthandler(user._id);changechat(user);clearmessages(index)}} key={user._id} id={user._id}>
+                    <div className={user._id===prevtouched?"currentholdwrapper touched":"currentholdwrapper"}>
                       <div className="img-wrapper">
                         <img className="imagee" src={user.avatarimage?user.avatarimage:"https://cdn4.iconfinder.com/data/icons/user-people-2/48/6-1024.png"}/>
                         <div className={presentstatus.length>0 && presentstatus[index]?.isactive===true?"active":"inactive"}></div>
@@ -276,9 +328,30 @@ useEffect(()=>{
                 )})}
 
                </div>}
-               {(contacts.length===0 && search!=="") && 
+               {
+                (presentcontacts.length===0 && load===0) &&
+                <div className="allusersalt">
+
+<Oval
+className="oval"
+  visible={true}
+  height="30"
+  width="30"
+  strokeWidth="5"
+  strokeWidthSecondary="5"
+  color="#a252ec"
+  secondaryColor="#dd88ff"
+  ariaLabel="oval-loading"
+  wrapperStyle={{  
+}}
+  wrapperClass=""
+  />
+  </div>
+               }
+               {(presentcontacts.length===0 && search!=="") && 
                <div className="allusersalt">
-              <div>no results found</div> 
+            
+               && <div>no results found</div>
               </div>
                }
         
