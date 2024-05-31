@@ -54,7 +54,7 @@ useEffect(()=>{
 
               setpresentcontacts(filteredarray);
              }
-        }
+       }
        else{
         setpresentcontacts(originalcontacts)
        }
