@@ -37,8 +37,14 @@ const Chatbox=()=>{
     console.log(date);
 
       const navigate=useNavigate();
+useEffect(()=>{
+    if(currentchat){
+ setmsgss([]);
+  setbgimg("")
 
-      
+        
+    }
+},[currentchat])
       
 useEffect(()=>{
     const Fetchdata=async()=>{
