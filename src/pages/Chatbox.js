@@ -37,11 +37,21 @@ const Chatbox=()=>{
     //console.log(date);
 
       const navigate=useNavigate();
+useEffect(()=>{
+    if(currentchat){
+ setmsgss([]);
+  setbgimg("")
 
+<<<<<<< HEAD
      useEffect(()=>{
         setmsgss([]);
         setbgimg("");
      },[currentchat]) 
+=======
+        
+    }
+},[currentchat])
+>>>>>>> 99fd2a90364e10b1e9d8f1dbe2d8150155d2a2c9
       
 useEffect(()=>{
     const Fetchdata=async()=>{
@@ -243,9 +253,17 @@ if(joinedroom===currentchat._id+currentholder._id || joinedroom===currentholder.
     useEffect(()=>{
         const runmsg=async()=>{
         if(currentchat!==null ){
+<<<<<<< HEAD
             //console.log("running msgs")
             //console.log(currentchat._id);
             //console.log(currentholder._id);
+=======
+        
+            
+            console.log("running msgs")
+            console.log(currentchat._id);
+            console.log(currentholder._id);
+>>>>>>> 99fd2a90364e10b1e9d8f1dbe2d8150155d2a2c9
             let data=await fetch(`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/messages/getmessages`,{
                 method:"POST",
                 headers:{
