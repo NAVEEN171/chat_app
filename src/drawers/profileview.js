@@ -16,13 +16,13 @@ import {
 
 
 const Profileview=({bgimg,setbgimg,currentholder,currentchat,setshowprofile})=>{
-    console.log("in profile")
-    console.log(currentchat)
+    //console.log("in profile")
+    //console.log(currentchat)
      const [selectedfile,setselectedfile]=useState(null);
 
     useEffect(()=>{
 if(selectedfile===null) return;
-console.log(selectedfile);
+//console.log(selectedfile);
     },[selectedfile])
 
 
@@ -41,9 +41,9 @@ console.log(selectedfile);
         
     })
     dataio=await dataio.json();
-    console.log(dataio)
+    //console.log(dataio)
     if(dataio){
-        console.log(dataio.data.backgroundimage)
+        //console.log(dataio.data.backgroundimage)
         deleteObject(ref(storage,bgimg))
 
         setbgimg(dataio.data.backgroundimage)
@@ -52,14 +52,14 @@ console.log(selectedfile);
     }
 
     const uploadfilehandler=async()=>{
-       console.log("i am running") 
+       //console.log("i am running") 
        let url;
         if(selectedfile===null) return;
   const imageRef=ref(storage,`uploadimages/${selectedfile.name + v4()}`)
  let data=await uploadBytes(imageRef,selectedfile)
  if(data){
     url=await getDownloadURL(data.ref)
-    console.log(url)
+    //console.log(url)
 
  }
  if(url){
@@ -78,9 +78,9 @@ console.log(selectedfile);
         
     })
     dataio=await dataio.json();
-    console.log(dataio)
+    //console.log(dataio)
     if(dataio){
-        console.log(dataio.data.backgroundimage)
+        //console.log(dataio.data.backgroundimage)
         setbgimg(dataio.data.backgroundimage)
 
     }

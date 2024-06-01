@@ -60,7 +60,7 @@ const Avatar = () => {
   },[file])
   
   const filehandler= (e)=>{
-      console.log(e.target.files[0])
+      //console.log(e.target.files[0])
 
       if(e.target.files[0]){
          
@@ -73,8 +73,8 @@ const Avatar = () => {
 
 
   const changeprofilephoto=(e)=>{
-   console.log(fileref.current.value)
-    console.log(prevdiv)
+   //console.log(fileref.current.value)
+    //console.log(prevdiv)
     if(prevdiv && prevdiv.classList.contains("selected")){
       prevdiv.classList.remove("selected")
     }
@@ -86,11 +86,11 @@ const Avatar = () => {
       }
     }
     setfile(null);
-    console.log(e.target)
+    //console.log(e.target)
     e.target.classList.add("selected")
    let change=e.target.style.backgroundImage.match(/url\("([^"]+)"\)/)[1]; 
    setpreviewurl(change);
-   console.log(change) 
+   //console.log(change) 
    setselected(`${change}`);
    setfile(null);
   setprevdiv(e.target)
@@ -100,6 +100,9 @@ const Avatar = () => {
        if(localStorage.getItem("chat with favos")){
         setcurrenthold(JSON.parse(localStorage.getItem("chat with favos")));
        }
+       else{
+        navigate("/Login")
+       }
   },[])
   
 
@@ -108,7 +111,7 @@ const Avatar = () => {
      if(selected!==""){
       const user=await JSON.parse(localStorage.getItem("chat with favos"));
 
-      console.log(user)
+      //console.log(user)
       let data=await fetch(`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/Setavatar/${user.insertedId || user._id}`,
       {
 
@@ -129,7 +132,7 @@ const Avatar = () => {
       local.avatarimage=data.avatarimage;
       
       localStorage.setItem("chat with favos",JSON.stringify(local))
-      console.log(data)
+      //console.log(data)
       navigate("/");
      }
      else if(fileref.current.value!==null){
@@ -139,7 +142,7 @@ const Avatar = () => {
  let url;
  if(data2){
     url=await getDownloadURL(data2.ref)
-    console.log(url)
+    //console.log(url)
  }
       
       
@@ -165,12 +168,12 @@ const Avatar = () => {
       }
        if(data){
        data=await data.json();
-       console.log(data.details)
+       //console.log(data.details)
        let local=JSON.parse(localStorage.getItem("chat with favos"));
-       console.log(local)
+       //console.log(local)
        local.setavatar=data.setavatar;
        local.avatarimage=data.avatarimage;
-       console.log(local)
+       //console.log(local)
        localStorage.setItem("chat with favos",JSON.stringify(local))
        navigate("/")
       }
@@ -178,13 +181,13 @@ const Avatar = () => {
        
      }
     catch(err){
-      console.log(err)
+      //console.log(err)
     }}
      
     
     
-      console.log(selected) 
-    console.log(file);
+      //console.log(selected) 
+    //console.log(file);
   
 
   }

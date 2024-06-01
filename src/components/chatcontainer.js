@@ -31,8 +31,8 @@ setfocused(true)
   
 
     const handleKeyDown=(event)=>{
-      console.log("key pressed")
-      console.log(event.key)
+      //console.log("key pressed")
+      //console.log(event.key)
       if (event.key === 'Enter') {
         event.preventDefault(); // Prevent the default action (form submission)
 
@@ -43,7 +43,7 @@ setfocused(true)
             let inputelement=document.getElementById("inputwrapper");
             let inputwrapper=document.getElementById("messagewrapper");
             let messagecontainer=document.getElementById("messages");
-            console.log(messagecontainer);
+            //console.log(messagecontainer);
             target.style.height=`40px`;
               inputelement.style.height=`60px`;
               inputwrapper.style.height=`70px`;
@@ -54,9 +54,9 @@ setfocused(true)
     const scrollBottom=()=>{
       if(window.innerWidth<=600){
         let element=document.getElementById("containerwrapper");
-        console.log(element)
+        //console.log(element)
         if(element){
-          console.log(element.scrollHeight);
+          //console.log(element.scrollHeight);
           element.scrollTop=element.scrollHeight;
 
         }
@@ -66,15 +66,15 @@ setfocused(true)
      
 
             setmsg(e.target.value);
-            console.log(msg);
+            //console.log(msg);
             let target=e.target;
             let inputelement=document.getElementById("inputwrapper");
             let inputwrapper=document.getElementById("messagewrapper");
             let messagecontainer=document.getElementById("messages");
             let containerwrapper=document.getElementById("containerwrapper");
-            console.log(containerwrapper)
+            //console.log(containerwrapper)
 
-            console.log(messagecontainer);
+            //console.log(messagecontainer);
             e.target.style.height=`40px`;
               inputelement.style.height=`60px`;
               inputwrapper.style.height=`70px`;
@@ -89,8 +89,8 @@ setfocused(true)
 
           let heightValue = computedStyle.getPropertyValue('height');
           heightValue=parseInt(heightValue);
-          console.log(heightValue);
-          console.log(containerwrapper.style.height);
+          //console.log(heightValue);
+          //console.log(containerwrapper.style.height);
             messagecontainer.style.height=`${heightValue-(parseInt(inputwrapper.style.height))-70}px`
           
 
@@ -104,12 +104,12 @@ setfocused(true)
 
           let heightValue = computedStyle.getPropertyValue('height');
           heightValue=parseInt(heightValue);
-          console.log(heightValue);
+          //console.log(heightValue);
            
              messagecontainer.style.height=`${heightValue-(parseInt(inputwrapper.style.height))-70}px`
-              console.log("less")
+              //console.log("less")
             }
-            console.log(target.scrollHeight)
+            //console.log(target.scrollHeight)
           
       
 
@@ -126,12 +126,12 @@ setfocused(true)
       }
     }
     const sendhandler=async()=>{
-      console.log("running..................")
+      //console.log("running..................")
 
-      console.log(currentholder);
-      console.log("i am about to run");
-      console.log(currentholder._id,currentchat._id)
-      console.log(msg)
+      //console.log(currentholder);
+      //console.log("i am about to run");
+      //console.log(currentholder._id,currentchat._id)
+      //console.log(msg)
       if(msg===""){
         return;
       }
@@ -153,18 +153,18 @@ setfocused(true)
       )
       if(data){
         data=await data.json();
-   /*     console.log("current room")
-        console.log(data);
+   /*     //console.log("current room")
+        //console.log(data);
         socket=io("${process.env.REACT_APP_DEPLOYMENT_BACKEND}")
 
             socket.emit("joinchat",data.id);
-            socket.on("connuser",()=>{console.log("conuser")})
+            socket.on("connuser",()=>{//console.log("conuser")})
 
         if(data.id){
           setcurrentroomid(data.id)
         }*/
-        console.log("in send handler ,data is obtained");
-        console.log(data);
+        //console.log("in send handler ,data is obtained");
+        //console.log(data);
         
         settingmessageshandler(msg);
         setmsg("");
@@ -185,17 +185,17 @@ setfocused(true)
          setshowprofile(!showprofile)
     }
     const closeshowhandler=()=>{
-      console.log("ruuning")
+      //console.log("ruuning")
 setshow(!show)
     }
     useEffect(()=>{
-      console.log("currentchat");
-      console.log(currentchat);
+      //console.log("currentchat");
+      //console.log(currentchat);
       setmsg("")
     },[currentchat])
     const handleemojiclick=(event,emoji)=>{
-      console.log(event)
-      console.log(emoji)
+      //console.log(event)
+      //console.log(emoji)
       let message=msg;
       message+=event.emoji;
       setmsg(message);

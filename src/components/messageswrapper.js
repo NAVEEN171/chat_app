@@ -5,7 +5,7 @@ import {Fragment} from "react";
 import Mainprofile from "../drawers/mainprofile";
 
 const Messageswrapper=({bgimg,currentchatmsgs})=>{
-    console.log(bgimg)
+    //console.log(bgimg)
         return(
             <Fragment>
             <div  className="messages" id="messages" style={{backgroundImage:`url(${bgimg})`}}>

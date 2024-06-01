@@ -35,7 +35,7 @@ import { useState,useEffect} from "react";
                if(errors[key]!=="") return;
            }
            try{
-            console.log("2 time")
+            //console.log("2 time")
            let data=await fetch(`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/Signup`,
           { method:'POST',
           headers:{
@@ -52,7 +52,7 @@ import { useState,useEffect} from "react";
        
            ) ; 
            data=await data.json();
-           console.log(data)
+           //console.log(data)
            if(data && data.status===200){
             localStorage.setItem(
                   "chat with favos",JSON.stringify(data.user)
@@ -67,14 +67,14 @@ import { useState,useEffect} from "react";
 
       }
            catch(err){
-            console.log(err)
+            //console.log(err)
            }
      
     
 
            
            
-           console.log(values)
+           //console.log(values)
       }
       const changehandler=(event)=>{
             if(values.username!=="" && values.password!=="" &&values.email!=="" && values.confirmpassword!=="" ){

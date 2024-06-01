@@ -21,7 +21,7 @@ const Login=()=>{
       e.preventDefault()
       if(options.email==="" && options.password===""){
         seterror("email and password is empty");
-        console.log("in func");
+        //console.log("in func");
        
       }
       else if(options.email===""){
@@ -45,22 +45,22 @@ const Login=()=>{
            })
          
             data= await data.json();
-            console.log(data);
+            //console.log(data);
            
            if(data && data.status===400){
               seterror(data.msg)
            }
            if(data && data.status===200){
                    seterror("")
-                   console.log("data.user")
-                   console.log(data.user)
+                   //console.log("data.user")
+                   //console.log(data.user)
                    localStorage.setItem("chat with favos",JSON.stringify(data.user));
                    navigate("/");
            }
            
       }
       catch(err){
-        console.log(err)
+        //console.log(err)
       }
     }}
     return(

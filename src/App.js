@@ -6,7 +6,6 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Avatar from "./pages/Avatar";
 import Chatbox from "./pages/Chatbox";
-import Framer from './components/Framer';
 
 function App() {
   return (
@@ -18,7 +17,6 @@ function App() {
       <Route path="/Login" element={<Login/>}/>
       <Route path="/Avatar" element={<Avatar/>}/>
       <Route path="/" element={<Chatbox/>}/>
-      <Route path="/framer" element={<Framer/>}/>
 
 
             </Routes></BrowserRouter>

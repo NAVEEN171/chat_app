@@ -16,7 +16,7 @@ const Mainprofile=({setcurrentchat,setcurrentholder,currentholder,setshowmyprofi
   const navigate=useNavigate()
 useEffect(()=>{
 
-  console.log(enteredname)
+  //console.log(enteredname)
 },[enteredname])
 
   const changenamehandler=async()=>{
@@ -24,7 +24,7 @@ useEffect(()=>{
       return;
     }
     if(enteredname.length>0){
-         console.log(currentholder)
+         //console.log(currentholder)
         
       let data=await fetch(`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/changename/${currentholder._id}`,
       {
@@ -40,7 +40,7 @@ useEffect(()=>{
       })  
       if(data){
         data=await data.json();
-        console.log(data);
+        //console.log(data);
         setcurrentholder(data.exisitinguser);
         setenteredname(data.exisitinguser.username)
         setcurrentchat(data.exisitinguser)
@@ -58,7 +58,7 @@ const changehandler=(e)=>{
     let local;
          if(localStorage.getItem("chat with favos")){
            local=JSON.parse(localStorage.getItem("chat with favos"));
-          console.log(local._id)
+          //console.log(local._id)
 
          }
          if(local._id){
@@ -70,7 +70,7 @@ const changehandler=(e)=>{
             }
           })
          data=await data.json();
-          console.log(data)
+          //console.log(data)
           if(data.msg==="success"){
             localStorage.removeItem("chat with favos")
             navigate("/Signup")

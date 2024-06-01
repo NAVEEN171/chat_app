@@ -34,11 +34,14 @@ const Chatbox=()=>{
     const [bgimg,setbgimg]=useState("");
     const [date,setdate]=useState(new Date());
     const [futuretime,setfuturetime]=useState(null);
-    console.log(date);
+    //console.log(date);
 
       const navigate=useNavigate();
 
-      
+     useEffect(()=>{
+        setmsgss([]);
+        setbgimg("");
+     },[currentchat]) 
       
 useEffect(()=>{
     const Fetchdata=async()=>{
@@ -60,7 +63,7 @@ useEffect(()=>{
     )
     if(data){
         data=await data.json();
-        console.log(data);
+        //console.log(data);
         if(data.msg==="success"){
            let data2=await fetch(`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/changeroom/${data.id}`,{
             method:"POST",
@@ -79,7 +82,7 @@ useEffect(()=>{
            }
         }
         else{
-            console.log(data);
+            //console.log(data);
                let data2=await fetch(`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/changeroom/${"Empty"}`,{
                  method:"POST",
                  headers:{
@@ -110,7 +113,7 @@ Fetchdata();
         if(joinedroom!==""){
 
     if(localStorage.getItem("chat with favos")){
-        console.log("heyyy")
+        //console.log("heyyy")
         let local=JSON.parse(localStorage.getItem("chat with favos"));
        
         
@@ -147,8 +150,8 @@ run();
 
    let future_time=new Date(date.getTime()+ 2* 60000);
 
-        console.log(future_time);
-        console.log(future_time>date)
+        //console.log(future_time);
+        //console.log(future_time>date)
         setfuturetime(future_time)
       }
     ,[]);*/
@@ -156,8 +159,8 @@ run();
 
         //search name of the chat and join room id using socket
     const searchname=async()=>{
-        console.log(currentchat._id);
-        console.log(currentholder._id);
+        //console.log(currentchat._id);
+        //console.log(currentholder._id);
 if(joinedroom===currentchat._id+currentholder._id || joinedroom===currentholder._id+currentchat._id){
     return;
 }
@@ -175,21 +178,21 @@ if(joinedroom===currentchat._id+currentholder._id || joinedroom===currentholder.
             })
             if(data){
                 data=await data.json();
-                console.log("data is")
+                //console.log("data is")
                 socket.emit("join chat",data.id);
                socket.on("joinedchat",(room)=>{
-                console.log(`room joined is ${room}`);
+                //console.log(`room joined is ${room}`);
              
                 if(room){
                     setjoinedroom(room);
                 }
                })
-                console.log(data)
+                //console.log(data)
             }
         
     }
     const changechathandler=async(chat)=>{
-        console.log(chat)
+        //console.log(chat)
                     setcurrentchat(chat)
                     setsendd(null);
             
@@ -207,20 +210,20 @@ if(joinedroom===currentchat._id+currentholder._id || joinedroom===currentholder.
         })
         if(data){
             data=await data.json();
-            console.log("data is")
-            console.log(data)
+            //console.log("data is")
+            //console.log(data)
         }
     }*/
     }
    
     const settingmessageshandler=(newmsg)=>{
-        console.log("in setting messageshandler")
+        //console.log("in setting messageshandler")
 
         if(newmsg.length>0){
-            console.log("i will fecth the data")            
+            //console.log("i will fecth the data")            
                 setmsgsent(!msgsent);
-                console.log("in setting messageshandler")
-                console.log("changed msgsent state and sendd state")
+                //console.log("in setting messageshandler")
+                //console.log("changed msgsent state and sendd state")
           if(sendd===null){
             setsendd(true);
           }
@@ -240,9 +243,9 @@ if(joinedroom===currentchat._id+currentholder._id || joinedroom===currentholder.
     useEffect(()=>{
         const runmsg=async()=>{
         if(currentchat!==null ){
-            console.log("running msgs")
-            console.log(currentchat._id);
-            console.log(currentholder._id);
+            //console.log("running msgs")
+            //console.log(currentchat._id);
+            //console.log(currentholder._id);
             let data=await fetch(`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/messages/getmessages`,{
                 method:"POST",
                 headers:{
@@ -258,20 +261,20 @@ if(joinedroom===currentchat._id+currentholder._id || joinedroom===currentholder.
           
               }
                 )
-                console.log(data)
+                //console.log(data)
                 if(data){
                 data= await data.json()
-                console.log(data)
+                //console.log(data)
                 if(data.showmsgs===null){
                     setmsgss([]);
                     setbgimg("")
                     return;
                 }
                 let obj=Object.values(data.showmsgs);
-                console.log(obj)
+                //console.log(obj)
                 let arr=[...obj]
-                console.log("arr")
-                console.log(arr)
+                //console.log("arr")
+                //console.log(arr)
                
                 
                 if(arr.length!==0){
@@ -281,11 +284,11 @@ if(joinedroom===currentchat._id+currentholder._id || joinedroom===currentholder.
                    
             
                 let lastelement=data.messages[data.messages.length-1]
-                console.log(lastelement)
+                //console.log(lastelement)
                 lastelement.send=false;
                 
                 socket.emit("new message",data);
-                console.log("emitted new msg!!!")
+                //console.log("emitted new msg!!!")
                 }
                     
                     
@@ -299,9 +302,9 @@ if(joinedroom===currentchat._id+currentholder._id || joinedroom===currentholder.
                         setscrolldown(!scrolldown);
                     }
                 }
-                console.log(data);
+                //console.log(data);
                 if(data){
-                console.log(data.backgroundimage);
+                //console.log(data.backgroundimage);
                 setbgimg(data.backgroundimage)
                 }
             }
@@ -314,9 +317,9 @@ if(joinedroom===currentchat._id+currentholder._id || joinedroom===currentholder.
            const running=async()=>{ 
            if(datacontent.length>0){
                 let data=[...datacontent];
-                console.log(data)
+                //console.log(data)
                 }
-       console.log("running")
+       //console.log("running")
                 
            }
             running()
@@ -326,7 +329,7 @@ if(joinedroom===currentchat._id+currentholder._id || joinedroom===currentholder.
 
 
        const makeuseronline=async(uid)=>{
-        console.log(uid);
+        //console.log(uid);
         let data=await fetch(`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/status/${uid}`,{
             method:"POST",
             headers:{
@@ -341,8 +344,8 @@ if(joinedroom===currentchat._id+currentholder._id || joinedroom===currentholder.
         })
         if(data){
             data=await data.json();
-            console.log(data);
-            console.log("i am loki")
+            //console.log(data);
+            //console.log("i am loki")
 
             setchangeactive(!changeactive);
 
@@ -353,11 +356,11 @@ if(joinedroom===currentchat._id+currentholder._id || joinedroom===currentholder.
        const messagerecieved=async(message)=>{
         if(message.status===true && message.lastelement.uid!==currentmsgid ){
                 
-            console.log(`message recieved is ${message}`)
-            console.log(message)
-            console.log("running//");
-            console.log(message.lastelement.uid)
-            console.log(currentmsgid)
+            //console.log(`message recieved is ${message}`)
+            //console.log(message)
+            //console.log("running//");
+            //console.log(message.lastelement.uid)
+            //console.log(currentmsgid)
         setcurrentmsgid(message.lastelement.uid)
             
             
@@ -378,7 +381,7 @@ if(joinedroom===currentchat._id+currentholder._id || joinedroom===currentholder.
        }
   const makeuseroffline=async(useridentification)=>{
 
-    console.log(useridentification);
+    //console.log(useridentification);
     let data=await fetch(`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/status/${useridentification}`,{
                     method:"POST",
                     headers:{
@@ -393,8 +396,8 @@ if(joinedroom===currentchat._id+currentholder._id || joinedroom===currentholder.
                 })
                 if(data){
                     data=await data.json();
-                    console.log(data);
-                    console.log("i am loki")
+                    //console.log(data);
+                    //console.log("i am loki")
 
         setchangeactive(!changeactive);
                     
@@ -460,8 +463,8 @@ const local=async()=>{
               
         if(localStorage.getItem("chat with favos")){
             const data=await JSON.parse(localStorage.getItem("chat with favos"))
-            console.log("query")
-        console.log(`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/getuser/${data.insertedId?data.insertedId : data._id}`)
+            //console.log("query")
+        //console.log(`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/getuser/${data.insertedId?data.insertedId : data._id}`)
             let using=await fetch(`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/getuser/${data.insertedId?data.insertedId : data._id}`,
                 {method:"GET",
                     headers:{
@@ -473,11 +476,11 @@ const local=async()=>{
             )
         
             using=await using.json();
-            console.log(using);
-            console.log(using.user);
+            //console.log(using);
+            //console.log(using.user);
             setcurrentholder(using.user);
-            console.log("main")
-            console.log(using.user._id)
+            //console.log("main")
+            //console.log(using.user._id)
             socket=io(`${process.env.REACT_APP_DEPLOYMENT_BACKEND}`,{
                 reconnection:false,
                 transports: ['websocket',"polling"] // Use WebSocket transport for better performance
@@ -492,7 +495,7 @@ const local=async()=>{
               socket.emit("setup",using.user);
             
             const data2=await JSON.parse(localStorage.getItem("chat with favos"))
-            console.log(data2);
+            //console.log(data2);
         
            let allusers=await fetch(`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/getallusers/${data.insertedId || data._id}`,
            {method:"GET",
@@ -505,8 +508,8 @@ const local=async()=>{
            )
             
             allusers=await allusers.json();
-            console.log(allusers);
-            console.log(allusers.users);
+            //console.log(allusers);
+            //console.log(allusers.users);
             setcontacts(allusers.users)
             
         }

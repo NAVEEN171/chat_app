@@ -19,9 +19,9 @@ const Contacts=({scrolldown,changeactive,setchangeactive,change,setmsgsent,msgse
     
 const scrolldownhandler=()=>{
   let element=document.getElementById("messagecontainer");
-  console.log(element)
+  //console.log(element)
   if(element){
-    console.log(element.scrollHeight)
+    //console.log(element.scrollHeight)
     
     
     element.scrollTop=element.scrollHeight;
@@ -30,13 +30,13 @@ const scrolldownhandler=()=>{
 
 useEffect(()=>{
        if(search!=="" && contacts.length>0){
-        console.log("search is ",search)
+        //console.log("search is ",search)
              let cons=[...contacts]
            
              
              let filteredarray=cons.filter((contact)=>contact.username.toLowerCase().includes(search.toLowerCase()));
              if(filteredarray.length>0){
-              console.log("Filtered contacts:", filteredarray); // Log the filtered contacts
+              //console.log("Filtered contacts:", filteredarray); // Log the filtered contacts
 
               setpresentcontacts(filteredarray);
              }
@@ -50,7 +50,7 @@ useEffect(()=>{
              
              let filteredarray=cons.filter((contact)=>contact.username.toLowerCase().includes(search.toLowerCase()));
              if(filteredarray.length>0){
-              console.log("Filtered contacts:", filteredarray); // Log the filtered contacts
+              //console.log("Filtered contacts:", filteredarray); // Log the filtered contacts
 
               setpresentcontacts(filteredarray);
              }
@@ -68,8 +68,8 @@ if(scrolldown!==null){
 useEffect(()=>{
   if(contacts.length>0 && take===0){
     setoriginalcontacts(contacts);
-    console.log("original contacts");
-    console.log(originalcontacts);
+    //console.log("original contacts");
+    //console.log(originalcontacts);
     settake(1);
   }
 },[contacts]
@@ -85,13 +85,13 @@ useEffect(()=>{
               local = JSON.parse(localStorage.getItem("chat with favos"));
             }
             cons =search!==""?[...presentcontacts]:[...contacts];
-            console.log("i think msg recieved")
-            console.log(cons);
+            //console.log("i think msg recieved")
+            //console.log(cons);
       
             if (local && contacts.length > 0) {
               promises = cons.map(async (user) => {
                 try {
-                  console.log("fecthing users data")
+                  //console.log("fecthing users data")
                   const data = await fetch(`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/messages/search`, {
                     method: "POST",
                     headers: {
@@ -107,7 +107,7 @@ useEffect(()=>{
       
                   if (data.ok) {
                     const result = await data.json();
-                    console.log("data is", result);
+                    //console.log("data is", result);
       
                     if (result.msg === "success") {
                       user.lastmessage = result.lastmessage;
@@ -130,7 +130,7 @@ useEffect(()=>{
   let emptymessages=[];
   let messageArray=[]
   cons.forEach((contact)=>{
-    console.log(contact)
+    //console.log(contact)
     if( contact.lastmessage===null){
       emptymessages.push(contact);
       
@@ -139,16 +139,16 @@ useEffect(()=>{
       messageArray.push(contact)
     }
   });
-  console.log(messageArray);
+  //console.log(messageArray);
   if(messageArray.length>0){
     messageArray.sort((a,b)=>{
       return new Date(b.lastmessage.timestamps)-new Date(a.lastmessage.timestamps);
     })
   }
-    console.log("arrays");
-    console.log("equal");
-    console.log(messageArray.length+emptymessages.length===originalcontacts.length);
-    console.log(messageArray.length,emptymessages.length,originalcontacts.length)
+    //console.log("arrays");
+    //console.log("equal");
+    //console.log(messageArray.length+emptymessages.length===originalcontacts.length);
+    //console.log(messageArray.length,emptymessages.length,originalcontacts.length)
            if(messageArray.length+emptymessages.length===contacts.length){
             setoriginalcontacts([...messageArray,...emptymessages]);
             setpresentcontacts([...messageArray,...emptymessages]);
@@ -174,8 +174,8 @@ useEffect(()=>{
         }
       }, [contacts, msgsent,change]);
       useEffect(()=>{
-      console.log("present contacts are")
-        console.log(presentcontacts);
+      //console.log("present contacts are")
+        //console.log(presentcontacts);
       }
       ,[presentcontacts]
     )
@@ -183,15 +183,15 @@ useEffect(()=>{
         let users=[]
         let promises=[]
         let contactinfo=[...presentcontacts]
-        console.log("i am running")
+        //console.log("i am running")
         const activestatus=async()=>{
   
           if(contacts.length===0){
             return;
           }
          promises=contactinfo.map(async(user)=>{
-            console.log("ids")
-            console.log(user._id)
+            //console.log("ids")
+            //console.log(user._id)
             let data=await fetch(`${process.env.REACT_APP_DEPLOYMENT_BACKEND}/getuser/${user._id}`,  {method:"GET",
             headers:{
                 'Content-Type':'application/json',
@@ -200,11 +200,11 @@ useEffect(()=>{
             }
         });
             data=await data.json();
-            console.log("currents")
+            //console.log("currents")
             if(data){
               user.isactive=data.user.isactive;
             }
-            console.log(data);
+            //console.log(data);
           })
   
           await Promise.all(promises);
@@ -224,8 +224,8 @@ useEffect(()=>{
       
     useEffect(()=>{
     if(presentstatus.length>0 && presentstatus.length===contacts.length){
-        console.log("present cons");
-        console.log(presentstatus)
+        //console.log("present cons");
+        //console.log(presentstatus)
         
     }
     },[presentstatus])
@@ -242,12 +242,12 @@ useEffect(()=>{
   }
           
          if(presentcontacts.length>0 && presentcontacts[index].unseenmessages>0){
-          console.log("concs are")
+          //console.log("concs are")
           let concs=[...presentcontacts];
-          console.log(concs)
+          //console.log(concs)
           concs[index].unseenmessages=0;
-          console.log("after");
-          console.log(concs)
+          //console.log("after");
+          //console.log(concs)
           setpresentcontacts(concs);
           setchangeactive(!changeactive)
          }
