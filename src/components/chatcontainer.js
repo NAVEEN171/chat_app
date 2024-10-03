@@ -242,7 +242,7 @@ setshow(!show)
               </Fragment>
             }
             {!currentchat && <div className="videowrapper"><video className="video" loop autoPlay muted>
-        <source src={process.env.PUBLIC_URL + '/videos/welcomegif.mp4'} type="video/mp4" />
+        <source src="https://gifsec.com/wp-content/uploads/2022/09/welcome-gif-24.gif" type="video/mp4" />
         
       </video></div> }
 
