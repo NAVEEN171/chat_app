@@ -114,7 +114,7 @@ const Login = () => {
           notify("success", "successfully logged in");
 
           localStorage.setItem("chat with favos", JSON.stringify(data.user));
-          navigate("/");
+          setTimeout(() => navigate("/"), 0);
         }
       } catch (err) {
         notify("fail", "try again");
