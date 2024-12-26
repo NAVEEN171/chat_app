@@ -56,7 +56,7 @@ useEffect(()=>{
              }
        }
        else{
-        setpresentcontacts(originalcontacts)
+        setmsgsent(!msgsent);
        }
 },[search])
 useEffect(()=>{
