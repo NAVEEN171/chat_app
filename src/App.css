@@ -1,127 +1,317 @@
-body{
+body {
   user-select: none;
-  margin:0px;
-  padding:0px;
+  margin: 0px;
+  padding: 0px;
 }
-
-
-
 
 .App {
- 
-  width:100%;
-  height:100dvh;
+  width: 100%;
+  height: 100dvh;
 }
-.form-wrapper{
+/* In your App.css or another CSS file */
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+  20% {
+    transform: translateY(-10px);
+  }
+  40% {
+    transform: translateY(0);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+  80% {
+    transform: translateY(0);
+  }
+}
+
+/* From Uiverse.io by mrhyddenn */
+.spinner {
+  font-size: 28px;
+  position: relative;
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+}
+
+.spinner.center {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.spinner .spinner-blade {
+  position: absolute;
+  right: 10px;
+  bottom: 0;
+  width: 0.074em;
+  height: 0.2777em;
+  border-radius: 0.0555em;
+  background-color: transparent;
+  -webkit-transform-origin: center -0.2222em;
+  -ms-transform-origin: center -0.2222em;
+  transform-origin: center -0.2222em;
+  animation: spinner-fade9234 1s infinite linear;
+}
+
+.spinner .spinner-blade:nth-child(1) {
+  -webkit-animation-delay: 0s;
+  animation-delay: 0s;
+  -webkit-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+
+.spinner .spinner-blade:nth-child(2) {
+  -webkit-animation-delay: 0.083s;
+  animation-delay: 0.083s;
+  -webkit-transform: rotate(30deg);
+  -ms-transform: rotate(30deg);
+  transform: rotate(30deg);
+}
+
+.spinner .spinner-blade:nth-child(3) {
+  -webkit-animation-delay: 0.166s;
+  animation-delay: 0.166s;
+  -webkit-transform: rotate(60deg);
+  -ms-transform: rotate(60deg);
+  transform: rotate(60deg);
+}
+
+.spinner .spinner-blade:nth-child(4) {
+  -webkit-animation-delay: 0.249s;
+  animation-delay: 0.249s;
+  -webkit-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+.spinner .spinner-blade:nth-child(5) {
+  -webkit-animation-delay: 0.332s;
+  animation-delay: 0.332s;
+  -webkit-transform: rotate(120deg);
+  -ms-transform: rotate(120deg);
+  transform: rotate(120deg);
+}
+
+.spinner .spinner-blade:nth-child(6) {
+  -webkit-animation-delay: 0.415s;
+  animation-delay: 0.415s;
+  -webkit-transform: rotate(150deg);
+  -ms-transform: rotate(150deg);
+  transform: rotate(150deg);
+}
+
+.spinner .spinner-blade:nth-child(7) {
+  -webkit-animation-delay: 0.498s;
+  animation-delay: 0.498s;
+  -webkit-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.spinner .spinner-blade:nth-child(8) {
+  -webkit-animation-delay: 0.581s;
+  animation-delay: 0.581s;
+  -webkit-transform: rotate(210deg);
+  -ms-transform: rotate(210deg);
+  transform: rotate(210deg);
+}
+
+.spinner .spinner-blade:nth-child(9) {
+  -webkit-animation-delay: 0.664s;
+  animation-delay: 0.664s;
+  -webkit-transform: rotate(240deg);
+  -ms-transform: rotate(240deg);
+  transform: rotate(240deg);
+}
+
+.spinner .spinner-blade:nth-child(10) {
+  -webkit-animation-delay: 0.747s;
+  animation-delay: 0.747s;
+  -webkit-transform: rotate(270deg);
+  -ms-transform: rotate(270deg);
+  transform: rotate(270deg);
+}
+
+.spinner .spinner-blade:nth-child(11) {
+  -webkit-animation-delay: 0.83s;
+  animation-delay: 0.83s;
+  -webkit-transform: rotate(300deg);
+  -ms-transform: rotate(300deg);
+  transform: rotate(300deg);
+}
+
+.spinner .spinner-blade:nth-child(12) {
+  -webkit-animation-delay: 0.913s;
+  animation-delay: 0.913s;
+  -webkit-transform: rotate(330deg);
+  -ms-transform: rotate(330deg);
+  transform: rotate(330deg);
+}
+
+@keyframes spinner-fade9234 {
+  0% {
+    background-color: #a252ec;
+  }
+
+  100% {
+    background-color: transparent;
+  }
+}
+
+@keyframes bounce-left {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes bounce-right {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+
+.Toastify__toast {
+  animation: bounce 1s ease;
+}
+
+@media (max-width: 500px) {
+  .Toastify__toast-container {
+    top: 10px !important;
+    width: 80% !important;
+    left: 40px !important;
+  }
+}
+
+.form-wrapper {
   display: flex;
-  background: linear-gradient(45deg, rgb(169, 128, 221), rgb(117, 232, 224) 25%, rgb(242, 169, 164) 50%, rgb(254, 122, 170) 75%);
+  background: linear-gradient(
+    45deg,
+    rgb(169, 128, 221),
+    rgb(117, 232, 224) 25%,
+    rgb(242, 169, 164) 50%,
+    rgb(254, 122, 170) 75%
+  );
 
   backdrop-filter: blur(150px);
   align-items: center;
   justify-content: center;
-  width:100%;
-  height:100dvh;
-  
+  width: 100%;
+  height: 100dvh;
 }
-.underline{
-  height:5px;
-  position:absolute;
-  top:50px;
-  width:50px;
-  background-color:white;
-  
+.underline {
+  height: 5px;
+  position: absolute;
+  top: 50px;
+  width: 50px;
+  background-color: white;
 }
-.text{
+.text {
   font-size: 20px;
   font-weight: 800;
-  color:white;
-  position:relative;
-  
+  color: white;
+  position: relative;
+
   font-family: sans-serif;
 }
-.form-use{
-  border:1px solid rgba(255,255,255,0.5);
+.form-use {
+  border: 1px solid rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(10px);
   border-radius: 15px;
-  display:flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly; 
-  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1); 
-  min-height:500px;
-  width:400px;
+  justify-content: space-evenly;
+  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+  min-height: 500px;
+  width: 400px;
 }
-.error{
- color:red;
- flex:0;
-
+.error {
+  color: red;
+  flex: 0;
 }
-.user,.email,.password,.cpassword{
-
-  height:30px;
+.user,
+.email,
+.password,
+.cpassword {
+  height: 30px;
   font-size: 15px;
-  width:350px;
+  width: 350px;
   letter-spacing: 2px;
-  text-indent:20px;
-  color:white;
-  border:0.5px solid white;
-  border-radius:20px;
-  padding:2px;
-  background-color: rgba(255,255,255,0.2);
-   outline:none;
-   letter-spacing: 2px;
-   box-shadow:0 5px 15px rgba(0,0,0,0.05)
+  text-indent: 20px;
+  color: white;
+  border: 0.5px solid white;
+  border-radius: 20px;
+  padding: 2px;
+  background-color: rgba(255, 255, 255, 0.2);
+  outline: none;
+  letter-spacing: 2px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 }
 
-.user::placeholder,.email::placeholder,.password::placeholder,.cpassword::placeholder{
- color:white;
- letter-spacing: 1px;
-
+.user::placeholder,
+.email::placeholder,
+.password::placeholder,
+.cpassword::placeholder {
+  color: white;
+  letter-spacing: 1px;
 }
 
-.changeprocess{
+.changeprocess {
   font-size: 15px;
   font-weight: 700;
-  color:white;
+  color: white;
   text-decoration: none;
 }
-.control-login{
+.control-login {
   font-size: 15px;
   font-weight: 700;
-  color:white;
-
+  color: white;
 }
-.submitbutt{
-  background-color:white;
-  color:rgb(104, 104, 104);
-  outline:none;
-  border:none;
- text-align: center;
+.submitbutt {
+  background-color: white;
+  color: rgb(104, 104, 104);
+  outline: none;
+  border: none;
+  text-align: center;
   font-size: 20px;
   font-weight: 700;
   line-height: 40px;
-  height:40px;
-  width:150px;
-  cursor:pointer;
+  height: 40px;
+  width: 150px;
+  cursor: pointer;
   border-radius: 20px;
-
 }
-.changeprocess:hover{
-  color:rgb(138, 43, 226);
+.changeprocess:hover {
+  color: rgb(138, 43, 226);
 }
-.submitbutt:hover{
-  background-color:rgb(138, 43, 226);
-  color:white;
+.submitbutt:hover {
+  background-color: rgb(138, 43, 226);
+  color: white;
 }
 
-
-@media(max-width:500px){
-
-  .form-use{
-    width:85%;
-    min-height:400px;
+@media (max-width: 500px) {
+  .form-use {
+    width: 85%;
+    min-height: 400px;
   }
-  .user,.email,.cpassword,.password{
-    width:90%;
+  .user,
+  .email,
+  .cpassword,
+  .password {
+    width: 90%;
   }
 }
