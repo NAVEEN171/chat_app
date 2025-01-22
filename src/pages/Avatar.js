@@ -28,11 +28,11 @@ const avengers = [
   },
   {
     image:
-      "https://tse2.mm.bing.net/th?id=OIP.a9MlY9tJi8HfavzmsD_F4gAAAA&pid=Api&P=0&h=180",
+      "https://tse4.mm.bing.net/th?id=OIP.45cqghlWaWN9Cz4YjRshkAHaHa&pid=Api&P=0&h=180",
   },
   {
     image:
-      "https://avatars.mds.yandex.net/i?id=a888ef14679aad1efabbd454c63de8805eee541b-9225598-images-thumbs&n=13",
+      "https://tse4.mm.bing.net/th?id=OIP.kddJQs_5ngmsbZ3MfiF5HQHaHa&pid=Api&P=0&h=180",
   },
   {
     image: "https://images2.alphacoders.com/984/984402.jpg",
