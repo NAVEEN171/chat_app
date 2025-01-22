@@ -135,6 +135,7 @@ textarea {
 .eyeiconwrapper {
   flex: flex-end;
   margin-right: 10px;
+  cursor: pointer;
 }
 .detailswrapper {
   display: flex;

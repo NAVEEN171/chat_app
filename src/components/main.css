@@ -1,30 +1,25 @@
-.mainwrapper{
-   height:60px;
-    width:90%;
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    background-color:rgb(219, 220, 255);
-    border-radius: 10px;
-
-
+.mainwrapper {
+  height: 60px;
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(219, 220, 255);
+  border-radius: 10px;
 }
-.center-2{
-    height:70px;
-    width:100%;
-    display:flex;
-    align-items:center;
-    justify-content: center;
+.center-2 {
+  height: 70px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.image{
-    height:40px;
-
-    
+.image {
+  height: 40px;
 }
-.chat{
-   font-size: 20px;
-   font-weight: 700;
-   color:black;
-   margin-left:15px;
-   
+.chat {
+  font-size: 20px;
+  font-weight: 700;
+  color: black;
+  margin-left: 15px;
 }

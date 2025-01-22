@@ -106,6 +106,8 @@ const Mainprofile = ({
               currentholder.avatarimage?.startsWith("uploads")
                 ? `${process.env.REACT_APP_DEPLOYMENT_BACKEND}/${currentholder.avatarimage}`
                 : currentholder.avatarimage
+                ? currentholder.avatarimage
+                : "https://cdn4.iconfinder.com/data/icons/user-people-2/48/6-1024.png"
             }
           />
         </div>
