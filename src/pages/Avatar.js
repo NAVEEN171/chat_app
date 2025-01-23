@@ -60,6 +60,7 @@ const Avatar = () => {
   const [prevdiv, setprevdiv] = useState();
   const [previewurl, setpreviewurl] = useState("");
   const [selected, setselected] = useState("");
+  const [loading, setloading] = useState(false);
   const [file, setfile] = useState(null);
   const [currenthold, setcurrenthold] = useState(null);
   useEffect(() => {
@@ -117,6 +118,7 @@ const Avatar = () => {
   const submithandle = async (event) => {
     event.preventDefault();
     if (selected !== "") {
+      setloading(true);
       const user = await JSON.parse(localStorage.getItem("chat with favos"));
 
       //console.log(user)
@@ -140,11 +142,13 @@ const Avatar = () => {
 
       local.setavatar = data.setavatar;
       local.avatarimage = data.avatarimage;
+      setloading(false);
 
       localStorage.setItem("chat with favos", JSON.stringify(local));
       //console.log(data)
       navigate("/");
     } else if (fileref.current.value !== null) {
+      setloading(true);
       const user = await JSON.parse(localStorage.getItem("chat with favos"));
       const imageRef = ref(storage, `newuploads/${file.name}`);
       let data2 = await uploadBytes(imageRef, file);
@@ -181,6 +185,7 @@ const Avatar = () => {
           local.setavatar = data.setavatar;
           local.avatarimage = data.avatarimage;
           //console.log(local)
+          setloading(false);
           localStorage.setItem("chat with favos", JSON.stringify(local));
           navigate("/");
         }
@@ -229,7 +234,7 @@ const Avatar = () => {
             }}
             className="setprofile"
           >
-            Set Profile Photo
+            {loading ? "uploading ..." : "Set Profile Photo"}
           </button>
         </div>
         <div className="imagewrapper">
